@@ -29,10 +29,13 @@ type R2Bucket = {
   list(options?: { prefix?: string; cursor?: string; limit?: number }): Promise<R2ListResult>;
 };
 
-type WorkerEnv = {
-  REPOSITORY?: R2Bucket;
-  R2_PUBLIC_BASE_URL?: string;
-} | null | undefined;
+type WorkerEnv =
+  | {
+      REPOSITORY?: R2Bucket;
+      R2_PUBLIC_BASE_URL?: string;
+    }
+  | null
+  | undefined;
 
 let serverEntryPromise: Promise<ServerEntry> | undefined;
 const repositoryRoot = path.resolve(process.cwd(), "repository");
@@ -153,10 +156,7 @@ function manifestRadioTracks(): RadioTrack[] {
     .sort((a, b) => a.name.localeCompare(b.name));
 }
 
-async function maybeServeRadioPlaylist(
-  request: Request,
-  env: WorkerEnv,
-): Promise<Response | null> {
+async function maybeServeRadioPlaylist(request: Request, env: WorkerEnv): Promise<Response | null> {
   const url = new URL(request.url);
   if (url.pathname !== "/api/radio") return null;
 
@@ -205,11 +205,12 @@ function securityHeaders(): Record<string, string> {
       "font-src 'self' https://fonts.gstatic.com data:",
       "img-src 'self' data: blob: https:",
       "media-src 'self' blob: https:",
+      "frame-src 'self' https: blob:",
+      "object-src 'self' https: blob:",
       "connect-src 'self' https:",
       "frame-ancestors 'none'",
       "base-uri 'self'",
       "form-action 'self'",
-      "object-src 'none'",
       "upgrade-insecure-requests",
     ].join("; "),
     "cross-origin-opener-policy": "same-origin",
