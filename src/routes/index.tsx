@@ -160,7 +160,7 @@ function Index() {
               </div>
 
               <div className="mt-6 border-2 border-foreground p-4 text-center">
-                <div className="font-blackletter text-2xl">Notice</div>
+                <div className="font-serif text-2xl font-black uppercase tracking-widest">Notice</div>
                 <p className="mt-2 font-serif text-sm italic">
                   This edition is compiled from public records released by the
                   Department of War. Files remain hosted by the source.

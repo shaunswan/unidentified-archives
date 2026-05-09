@@ -31,7 +31,7 @@
   --color-ring: var(--ring);
   --color-classified: var(--classified);
   --color-signal: var(--signal);
-  --font-display: "UnifrakturCook", "Old English Text MT", "Blackletter", serif;
+  --font-display: "Playfair Display", "Times New Roman", Georgia, serif;
   --font-serif: "Playfair Display", "Times New Roman", Georgia, serif;
   --font-mono: "Special Elite", "Courier New", monospace;
   --font-sans: "Playfair Display", "Times New Roman", Georgia, serif;
