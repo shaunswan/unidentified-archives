@@ -22,6 +22,8 @@ type RadioContextValue = {
   isPlaying: boolean;
   isLoading: boolean;
   error: string | null;
+  /** Browsers block audible autoplay; we start muted until the user taps or uses controls. */
+  awaitingTapToUnmute: boolean;
   tracks: RadioTrack[];
   volume: number;
   playPause: () => void;
@@ -32,17 +34,26 @@ type RadioContextValue = {
 
 const RadioContext = createContext<RadioContextValue | null>(null);
 
+function isAutoplayBlocked(err: unknown): boolean {
+  return (
+    err instanceof DOMException && err.name === "NotAllowedError"
+  ) || (typeof err === "object" && err !== null && "name" in err && (err as { name: string }).name === "NotAllowedError");
+}
+
 export function RadioProvider({ children }: { children: ReactNode }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const currentIndexRef = useRef(0);
   const tracksRef = useRef<RadioTrack[]>([]);
   const historyRef = useRef<number[]>([]);
   const autoplayAttemptedRef = useRef(false);
+  /** Set after an unmuted play succeeds or the user uses controls (gesture). */
+  const userActivatedRef = useRef(false);
   const [tracks, setTracks] = useState<RadioTrack[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [awaitingTapToUnmute, setAwaitingTapToUnmute] = useState(false);
   const [volume, setVolumeState] = useState(0.2);
 
   useEffect(() => {
@@ -87,6 +98,26 @@ export function RadioProvider({ children }: { children: ReactNode }) {
     const randomIndex = pickRandomIndex(-1);
     void playTrack(randomIndex, true, true);
   }, [tracks]);
+
+  useEffect(() => {
+    if (!awaitingTapToUnmute) return;
+
+    const unlock = () => {
+      const a = audioRef.current;
+      if (!a) return;
+      a.muted = false;
+      a.volume = volume;
+      userActivatedRef.current = true;
+      setAwaitingTapToUnmute(false);
+    };
+
+    document.addEventListener("pointerdown", unlock, { capture: true });
+    document.addEventListener("keydown", unlock);
+    return () => {
+      document.removeEventListener("pointerdown", unlock, { capture: true });
+      document.removeEventListener("keydown", unlock);
+    };
+  }, [awaitingTapToUnmute, volume]);
 
   useEffect(() => {
     let cancelled = false;
@@ -153,11 +184,30 @@ export function RadioProvider({ children }: { children: ReactNode }) {
     if (!autoplay) return;
 
     try {
+      audio.muted = false;
       await audio.play();
       setError(null);
+      if (!audio.muted) {
+        userActivatedRef.current = true;
+        setAwaitingTapToUnmute(false);
+      }
     } catch (err) {
-      setIsPlaying(false);
-      setError(err instanceof Error ? err.message : "Playback blocked");
+      if (isAutoplayBlocked(err) && !audio.muted) {
+        audio.muted = true;
+        try {
+          await audio.play();
+          setError(null);
+          setAwaitingTapToUnmute(true);
+        } catch (errMuted) {
+          setIsPlaying(false);
+          setAwaitingTapToUnmute(false);
+          setError(errMuted instanceof Error ? errMuted.message : "Playback blocked");
+        }
+      } else {
+        setIsPlaying(false);
+        setAwaitingTapToUnmute(false);
+        setError(err instanceof Error ? err.message : "Playback blocked");
+      }
     }
   }
 
@@ -170,18 +220,32 @@ export function RadioProvider({ children }: { children: ReactNode }) {
       return;
     }
 
+    userActivatedRef.current = true;
+    audio.muted = false;
+    setAwaitingTapToUnmute(false);
+
     const nextIndex = tracks[currentIndex] ? currentIndex : pickRandomIndex(-1);
     void playTrack(nextIndex, true);
   }
 
   function playNext() {
     if (tracks.length === 0) return;
+    userActivatedRef.current = true;
+    if (audioRef.current) {
+      audioRef.current.muted = false;
+    }
+    setAwaitingTapToUnmute(false);
     const nextIndex = pickRandomIndex(currentIndexRef.current);
     void playTrack(nextIndex, true);
   }
 
   function playPrevious() {
     if (tracks.length === 0) return;
+    userActivatedRef.current = true;
+    if (audioRef.current) {
+      audioRef.current.muted = false;
+    }
+    setAwaitingTapToUnmute(false);
     const previousIndex = historyRef.current.at(-1);
 
     if (previousIndex == null) {
@@ -198,6 +262,9 @@ export function RadioProvider({ children }: { children: ReactNode }) {
     setVolumeState(value);
     if (audioRef.current) {
       audioRef.current.volume = value;
+      audioRef.current.muted = false;
+      userActivatedRef.current = true;
+      setAwaitingTapToUnmute(false);
     }
   }
 
@@ -210,6 +277,7 @@ export function RadioProvider({ children }: { children: ReactNode }) {
         isPlaying,
         isLoading,
         error,
+        awaitingTapToUnmute,
         tracks,
         volume,
         playPause,
@@ -277,11 +345,13 @@ export function UapRadioControl() {
             <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
               {radio.error
                 ? radio.error
-                : hasTracks
-                  ? radio.isPlaying
-                    ? "Live in archive"
-                    : "Standing by for random transmission"
-                  : "Drop mp3 files into repository/09_UAP_Radio"}
+                : radio.awaitingTapToUnmute
+                  ? "Autoplay is muted — tap anywhere or adjust volume for sound"
+                  : hasTracks
+                    ? radio.isPlaying
+                      ? "Live in archive"
+                      : "Standing by for random transmission"
+                    : "Drop mp3 files into repository/09_UAP_Radio"}
             </div>
           </div>
 
