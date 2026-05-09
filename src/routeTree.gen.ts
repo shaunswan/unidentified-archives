@@ -9,11 +9,17 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TimelineRouteImport } from './routes/timeline'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CasesCaseIdRouteImport } from './routes/cases.$caseId'
 import { Route as CasesCaseIdEpisodesEpisodeIdRouteImport } from './routes/cases.$caseId.episodes.$episodeId'
 
+const TimelineRoute = TimelineRouteImport.update({
+  id: '/timeline',
+  path: '/timeline',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
@@ -39,12 +45,14 @@ const CasesCaseIdEpisodesEpisodeIdRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/timeline': typeof TimelineRoute
   '/cases/$caseId': typeof CasesCaseIdRouteWithChildren
   '/cases/$caseId/episodes/$episodeId': typeof CasesCaseIdEpisodesEpisodeIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/timeline': typeof TimelineRoute
   '/cases/$caseId': typeof CasesCaseIdRouteWithChildren
   '/cases/$caseId/episodes/$episodeId': typeof CasesCaseIdEpisodesEpisodeIdRoute
 }
@@ -52,6 +60,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/timeline': typeof TimelineRoute
   '/cases/$caseId': typeof CasesCaseIdRouteWithChildren
   '/cases/$caseId/episodes/$episodeId': typeof CasesCaseIdEpisodesEpisodeIdRoute
 }
@@ -60,14 +69,21 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/timeline'
     | '/cases/$caseId'
     | '/cases/$caseId/episodes/$episodeId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/cases/$caseId' | '/cases/$caseId/episodes/$episodeId'
+  to:
+    | '/'
+    | '/about'
+    | '/timeline'
+    | '/cases/$caseId'
+    | '/cases/$caseId/episodes/$episodeId'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/timeline'
     | '/cases/$caseId'
     | '/cases/$caseId/episodes/$episodeId'
   fileRoutesById: FileRoutesById
@@ -75,11 +91,19 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  TimelineRoute: typeof TimelineRoute
   CasesCaseIdRoute: typeof CasesCaseIdRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/timeline': {
+      id: '/timeline'
+      path: '/timeline'
+      fullPath: '/timeline'
+      preLoaderRoute: typeof TimelineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -126,8 +150,19 @@ const CasesCaseIdRouteWithChildren = CasesCaseIdRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  TimelineRoute: TimelineRoute,
   CasesCaseIdRoute: CasesCaseIdRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
