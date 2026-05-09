@@ -141,14 +141,12 @@ function PreviewSurface({ kind, name, previewHref, tint, Icon }: PreviewSurfaceP
 
   if (kind === "pdf") {
     return (
-      <object
-        data={`${previewHref}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
-        type="application/pdf"
-        className="pointer-events-none h-full w-full bg-background"
+      <iframe
+        src={`${previewHref}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
+        title={name}
+        className="pointer-events-none h-full w-full border-0 bg-background"
         aria-label={name}
-      >
-        <FallbackPreview tint={tint} Icon={Icon} />
-      </object>
+      />
     );
   }
 
@@ -200,14 +198,12 @@ function ExpandedPreview({
 
   if (kind === "pdf") {
     return (
-      <object
-        data={`${previewHref}#toolbar=1&navpanes=0&view=FitH`}
-        type="application/pdf"
-        className="h-[75vh] w-full rounded-sm bg-background"
+      <iframe
+        src={`${previewHref}#toolbar=1&navpanes=0&view=FitH`}
+        title={name}
+        className="h-[75vh] w-full rounded-sm border-0 bg-background"
         aria-label={name}
-      >
-        <iframe src={previewHref} title={name} className="h-[75vh] w-full rounded-sm bg-background" />
-      </object>
+      />
     );
   }
 
