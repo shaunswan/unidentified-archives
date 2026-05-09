@@ -35,11 +35,11 @@ function Index() {
         </div>
 
         <div className="relative mx-auto max-w-7xl px-6 pt-24 pb-32 sm:pt-32 sm:pb-44">
-          <div className="font-mono text-[10px] uppercase tracking-[0.4em] text-primary">
+          <div className="font-mono text-[10px] uppercase tracking-[0.4em] text-accent">
             ◈ Declassified · {metadata.created}
           </div>
           <h1 className="mt-6 max-w-4xl font-display text-5xl leading-[1.05] sm:text-7xl md:text-8xl">
-            What the sky <em className="not-italic text-primary">refused</em> to explain.
+            Declassified — <em className="not-italic text-accent">Are we alone?</em>
           </h1>
           <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted-foreground">
             An interactive archive of the Department of War's first major UAP
