@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
-import { getCase } from "@/lib/cases";
+import { getCase, type Case, type Episode } from "@/lib/cases";
 import { ArrowLeft, ChevronRight } from "lucide-react";
 
 export const Route = createFileRoute("/cases/$caseId")({
@@ -23,7 +23,7 @@ function CasePage() {
   const period = c.yearRange ?? c.year?.toString() ?? c.date ?? "—";
   const fileCount =
     (c.files?.length ?? 0) +
-    (c.episodes?.reduce((n, e) => n + e.files.length, 0) ?? 0);
+    (c.episodes?.reduce((n: number, e: Episode) => n + e.files.length, 0) ?? 0);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -76,7 +76,7 @@ function CasePage() {
 
           {c.locations && (
             <div className="mt-6 flex flex-wrap gap-2">
-              {c.locations.map((l) => (
+              {c.locations.map((l: string) => (
                 <span key={l} className="rounded-sm border border-border bg-card px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
                   {l}
                 </span>
@@ -97,7 +97,7 @@ function CasePage() {
 
         {c.episodes && c.episodes.length > 0 ? (
           <ol className="divide-y divide-border/60">
-            {c.episodes.map((e, i) => (
+            {c.episodes.map((e: Episode, i: number) => (
               <li key={e.episodeId}>
                 <Link
                   to="/cases/$caseId/episodes/$episodeId"
