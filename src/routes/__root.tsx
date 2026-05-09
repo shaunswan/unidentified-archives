@@ -11,6 +11,11 @@ import { RadioProvider } from "@/components/UapRadio";
 
 import appCss from "../styles.css?url";
 
+const siteTitle = "The UAP Gazette - Declassified Files, PURSUE Release 01";
+const siteDescription =
+  "An old-newspaper archive of the Department of War's first major UAP disclosure: 9 cases, 23 incidents, 197 files.";
+const socialImage = "/og-image.png";
+
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -73,17 +78,27 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "The UAP Archive — PURSUE Release 01" },
-      { name: "description", content: "An interactive documentary archive of declassified UAP files released by the Department of War." },
+      { title: siteTitle },
+      { name: "description", content: siteDescription },
       { name: "author", content: "The UAP Archive" },
-      { property: "og:title", content: "The UAP Archive — PURSUE Release 01" },
-      { property: "og:description", content: "An interactive documentary archive of declassified UAP files released by the Department of War." },
+      { property: "og:site_name", content: "The UAP Archive" },
+      { property: "og:title", content: siteTitle },
+      { property: "og:description", content: siteDescription },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: socialImage },
+      { property: "og:image:width", content: "512" },
+      { property: "og:image:height", content: "512" },
+      { property: "og:image:alt", content: "The UAP Archive insignia" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: siteTitle },
+      { name: "twitter:description", content: siteDescription },
+      { name: "twitter:image", content: socialImage },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
+      { rel: "icon", href: "/favicon.png", type: "image/png" },
+      { rel: "shortcut icon", href: "/favicon.ico" },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png", sizes: "180x180" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
