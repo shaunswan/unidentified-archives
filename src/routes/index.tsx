@@ -2,13 +2,18 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { CaseCard } from "@/components/CaseCard";
 import { cases, metadata, totalEpisodes, totalFiles } from "@/lib/cases";
+import { Map, Search } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
       { title: "The UAP Gazette — Declassified Files, PURSUE Release 01" },
-      { name: "description", content: "An old-newspaper archive of the Department of War's first major UAP disclosure: 9 cases, 23 incidents, 197 files." },
+      {
+        name: "description",
+        content:
+          "An old-newspaper archive of the Department of War's first major UAP disclosure: 9 cases, 23 incidents, 197 files.",
+      },
     ],
   }),
 });
@@ -68,31 +73,28 @@ function Index() {
 
               <div className="mt-8 columns-1 gap-8 sm:columns-2 [&>p]:mb-4 [&>p]:font-serif [&>p]:text-[15px] [&>p]:leading-relaxed [&>p]:text-justify">
                 <p className="dropcap">
-                  In an extraordinary disclosure, the Department of War has
-                  posted the first tranche of materials it calls PURSUE
-                  Release {metadata.created} — a sweeping collection of
-                  mission reports, diplomatic cables, NASA crew debriefings,
-                  field photographs, witness statements and motion-picture
-                  evidence concerning Unidentified Anomalous Phenomena.
+                  In an extraordinary disclosure, the Department of War has posted the first tranche
+                  of materials it calls PURSUE Release {metadata.created} — a sweeping collection of
+                  mission reports, diplomatic cables, NASA crew debriefings, field photographs,
+                  witness statements and motion-picture evidence concerning Unidentified Anomalous
+                  Phenomena.
                 </p>
                 <p>
-                  The archive, presented herein, reorganizes some
-                  {" "}{totalFiles} files into {cases.length} cases and
-                  {" "}{totalEpisodes} narrative episodes — that the curious
-                  reader may pursue the matter not as a flat directory but
-                  as a documentary serial: by mission, by location, by year.
+                  The archive, presented herein, reorganizes some {totalFiles} files into{" "}
+                  {cases.length} cases and {totalEpisodes} narrative episodes — that the curious
+                  reader may pursue the matter not as a flat directory but as a documentary serial:
+                  by mission, by location, by year.
                 </p>
                 <p>
-                  Geographies span the Apollo program of the late 'sixties,
-                  Cold War cables from Papua New Guinea and Kazakhstan,
-                  decades of CENTCOM operations across the Persian Gulf and
-                  Mediterranean, and recent Bureau field investigations
-                  across the Western United States.
+                  Geographies span the Apollo program of the late 'sixties, Cold War cables from
+                  Papua New Guinea and Kazakhstan, decades of CENTCOM operations across the Persian
+                  Gulf and Mediterranean, and recent Bureau field investigations across the Western
+                  United States.
                 </p>
                 <p>
-                  Readers are invited to begin with the Catalog below, or to
-                  consult the Timeline for a chronological accounting of
-                  events. The originals remain hosted by the source.
+                  Readers are invited to begin with the Catalog below, or to consult the Timeline
+                  for a chronological accounting of events. The originals remain hosted by the
+                  source.
                 </p>
               </div>
 
@@ -121,7 +123,9 @@ function Index() {
             {/* Right column: sidebar stories */}
             <aside className="md:col-span-4">
               <div className="border-y-4 border-double border-foreground py-3 text-center">
-                <div className="font-mono text-[10px] uppercase tracking-[0.3em]">By the Numbers</div>
+                <div className="font-mono text-[10px] uppercase tracking-[0.3em]">
+                  By the Numbers
+                </div>
                 <dl className="mt-3 grid grid-cols-2 gap-3">
                   {[
                     ["09", "Cases"],
@@ -138,7 +142,9 @@ function Index() {
               </div>
 
               <div className="mt-6 border-t border-foreground/40 pt-4">
-                <div className="font-mono text-[10px] uppercase tracking-[0.3em]">Inside this edition</div>
+                <div className="font-mono text-[10px] uppercase tracking-[0.3em]">
+                  Inside this edition
+                </div>
                 <ul className="mt-3 space-y-3 font-serif text-sm">
                   <li className="border-b border-dashed border-foreground/40 pb-2">
                     <span className="font-black">Apollo Crew Debriefs</span> — astronauts on
@@ -149,8 +155,8 @@ function Index() {
                     unidentified contact at altitude.
                   </li>
                   <li className="border-b border-dashed border-foreground/40 pb-2">
-                    <span className="font-black">Papua, '74</span> — diplomatic cables from
-                    a missionary's village.
+                    <span className="font-black">Papua, '74</span> — diplomatic cables from a
+                    missionary's village.
                   </li>
                   <li>
                     <span className="font-black">Western U.S. Files</span> — Bureau field
@@ -160,10 +166,12 @@ function Index() {
               </div>
 
               <div className="mt-6 border-2 border-foreground p-4 text-center">
-                <div className="font-serif text-2xl font-black uppercase tracking-widest">Notice</div>
+                <div className="font-serif text-2xl font-black uppercase tracking-widest">
+                  Notice
+                </div>
                 <p className="mt-2 font-serif text-sm italic">
-                  This edition is compiled from public records released by the
-                  Department of War. Files remain hosted by the source.
+                  This edition is compiled from public records released by the Department of War.
+                  Files remain hosted by the source.
                 </p>
                 <a
                   href="https://www.war.gov/ufo"
@@ -182,9 +190,44 @@ function Index() {
       {/* CASES GRID */}
       <section id="cases" className="relative mx-auto max-w-7xl px-6 py-16">
         <div className="mb-8 rule-double py-3 text-center">
-          <div className="font-mono text-[10px] uppercase tracking-[0.3em]">Section B &middot; The Catalog</div>
+          <div className="font-mono text-[10px] uppercase tracking-[0.3em]">
+            Section B &middot; The Catalog
+          </div>
           <h2 className="mt-2 font-serif text-4xl font-black">Nine Cases of Note</h2>
-          <div className="mt-1 font-serif text-sm italic">— arranged for the discerning reader —</div>
+          <div className="mt-1 font-serif text-sm italic">
+            — arranged for the discerning reader —
+          </div>
+        </div>
+
+        <div className="mb-8 grid gap-4 border-y border-foreground/50 py-5 md:grid-cols-2">
+          <Link
+            to="/search"
+            className="group flex items-center gap-4 border border-foreground/60 bg-card p-4 transition-colors hover:bg-secondary"
+          >
+            <Search className="h-6 w-6 shrink-0" strokeWidth={1.5} />
+            <span>
+              <span className="block font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                Research Desk
+              </span>
+              <span className="mt-1 block font-serif text-xl font-black group-hover:underline">
+                Search cases, episodes, files, agencies, regions, and dates
+              </span>
+            </span>
+          </Link>
+          <Link
+            to="/map"
+            className="group flex items-center gap-4 border border-foreground/60 bg-card p-4 transition-colors hover:bg-secondary"
+          >
+            <Map className="h-6 w-6 shrink-0" strokeWidth={1.5} />
+            <span>
+              <span className="block font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                Geographic Index
+              </span>
+              <span className="mt-1 block font-serif text-xl font-black group-hover:underline">
+                Browse approximate archive regions on an evidence map
+              </span>
+            </span>
+          </Link>
         </div>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">

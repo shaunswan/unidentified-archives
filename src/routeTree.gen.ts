@@ -10,6 +10,8 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TimelineRouteImport } from './routes/timeline'
+import { Route as SearchRouteImport } from './routes/search'
+import { Route as MapRouteImport } from './routes/map'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CasesCaseIdRouteImport } from './routes/cases.$caseId'
@@ -19,6 +21,16 @@ import { Route as CasesCaseIdEpisodesEpisodeIdRouteImport } from './routes/cases
 const TimelineRoute = TimelineRouteImport.update({
   id: '/timeline',
   path: '/timeline',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SearchRoute = SearchRouteImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MapRoute = MapRouteImport.update({
+  id: '/map',
+  path: '/map',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -51,6 +63,8 @@ const CasesCaseIdEpisodesEpisodeIdRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/map': typeof MapRoute
+  '/search': typeof SearchRoute
   '/timeline': typeof TimelineRoute
   '/cases/$caseId': typeof CasesCaseIdRouteWithChildren
   '/cases/$caseId/': typeof CasesCaseIdIndexRoute
@@ -59,6 +73,8 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/map': typeof MapRoute
+  '/search': typeof SearchRoute
   '/timeline': typeof TimelineRoute
   '/cases/$caseId': typeof CasesCaseIdIndexRoute
   '/cases/$caseId/episodes/$episodeId': typeof CasesCaseIdEpisodesEpisodeIdRoute
@@ -67,6 +83,8 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/map': typeof MapRoute
+  '/search': typeof SearchRoute
   '/timeline': typeof TimelineRoute
   '/cases/$caseId': typeof CasesCaseIdRouteWithChildren
   '/cases/$caseId/': typeof CasesCaseIdIndexRoute
@@ -77,6 +95,8 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/map'
+    | '/search'
     | '/timeline'
     | '/cases/$caseId'
     | '/cases/$caseId/'
@@ -85,6 +105,8 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/map'
+    | '/search'
     | '/timeline'
     | '/cases/$caseId'
     | '/cases/$caseId/episodes/$episodeId'
@@ -92,6 +114,8 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/map'
+    | '/search'
     | '/timeline'
     | '/cases/$caseId'
     | '/cases/$caseId/'
@@ -101,6 +125,8 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  MapRoute: typeof MapRoute
+  SearchRoute: typeof SearchRoute
   TimelineRoute: typeof TimelineRoute
   CasesCaseIdRoute: typeof CasesCaseIdRouteWithChildren
 }
@@ -112,6 +138,20 @@ declare module '@tanstack/react-router' {
       path: '/timeline'
       fullPath: '/timeline'
       preLoaderRoute: typeof TimelineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/map': {
+      id: '/map'
+      path: '/map'
+      fullPath: '/map'
+      preLoaderRoute: typeof MapRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -169,6 +209,8 @@ const CasesCaseIdRouteWithChildren = CasesCaseIdRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  MapRoute: MapRoute,
+  SearchRoute: SearchRoute,
   TimelineRoute: TimelineRoute,
   CasesCaseIdRoute: CasesCaseIdRouteWithChildren,
 }

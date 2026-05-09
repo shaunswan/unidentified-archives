@@ -37,6 +37,18 @@ export function SiteHeader() {
             Timeline
           </Link>
           <Link
+            to="/search"
+            className="transition-colors hover:underline underline-offset-4 [&.active]:font-bold [&.active]:underline"
+          >
+            Search
+          </Link>
+          <Link
+            to="/map"
+            className="transition-colors hover:underline underline-offset-4 [&.active]:font-bold [&.active]:underline"
+          >
+            Map
+          </Link>
+          <Link
             to="/about"
             className="transition-colors hover:underline underline-offset-4 [&.active]:font-bold [&.active]:underline"
           >
