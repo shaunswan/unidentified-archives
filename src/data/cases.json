@@ -1,0 +1,527 @@
+{
+  "metadata": {
+    "title": "UAP Case Database - PURSUE Release 01",
+    "created": "2026-05-09",
+    "source": "www.war.gov/ufo",
+    "totalCases": 9,
+    "totalIncidents": 23
+  },
+  "cases": [
+    {
+      "caseId": "CASE-001",
+      "title": "Initial UAP Assessment & Composites",
+      "type": "initial_report",
+      "description": "Early UAP documentation and composite sketches from initial investigations",
+      "year": 2024,
+      "location": "Various",
+      "agency": "DOW",
+      "episodes": [
+        {
+          "episodeId": "EP-001-01",
+          "title": "Initial Report 11",
+          "type": "report",
+          "files": [
+            "01_Initial_Reports/059uap00011.pdf",
+            "01_Initial_Reports/059uap00011 (1).pdf"
+          ]
+        },
+        {
+          "episodeId": "EP-001-02",
+          "title": "Initial Report 12",
+          "type": "report",
+          "files": [
+            "01_Initial_Reports/059uap00012.pdf",
+            "01_Initial_Reports/059uap00012 (1).pdf"
+          ]
+        },
+        {
+          "episodeId": "EP-001-03",
+          "title": "Initial Report 13",
+          "type": "report",
+          "files": [
+            "01_Initial_Reports/059uap00013.pdf",
+            "01_Initial_Reports/059uap00013 (1).pdf"
+          ]
+        },
+        {
+          "episodeId": "EP-001-04",
+          "title": "Composite Sketch (April 2024)",
+          "type": "visual_composite",
+          "description": "Visual representation from April 30, 2024 sighting",
+          "files": [
+            "01_Initial_Reports/2024-04-30-composite-sketch.pdf",
+            "01_Initial_Reports/2024-04-30-composite-sketch (1).pdf"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "CASE-002",
+      "title": "Middle East Operations Campaign",
+      "type": "military_operations",
+      "description": "Series of UAP incidents reported during military operations in Middle East",
+      "yearRange": "2000-2025",
+      "locations": ["Arabian Gulf", "Persian Gulf", "Strait of Hormuz", "Mediterranean", "Iran", "Syria"],
+      "agency": "DOW - CENTCOM",
+      "episodes": [
+        {
+          "episodeId": "EP-002-01",
+          "title": "Launch Summary (2000)",
+          "type": "operation_summary",
+          "date": "2000-02",
+          "files": ["02_Military_Documents/dow-uap-d49-launch-summary-february-2000.pdf"]
+        },
+        {
+          "episodeId": "EP-002-02",
+          "title": "Syria Operations (November 2016)",
+          "type": "mission_report",
+          "location": "Syria",
+          "date": "2016-11",
+          "files": ["02_Military_Documents/dow-uap-d55-mission-report-syria-november-2016.pdf"]
+        },
+        {
+          "episodeId": "EP-002-03",
+          "title": "Arabian Gulf Operations (July 2020)",
+          "type": "mission_report",
+          "location": "Arabian Gulf",
+          "date": "2020-07",
+          "relatedIncidents": ["Arabian Gulf-2020-A", "Arabian Gulf-2020-B"],
+          "files": [
+            "02_Military_Documents/dow-uap-d5-mission-report-arabian-gulf-2020.pdf",
+            "02_Military_Documents/dow-uap-d6-mission-report-arabian-gulf-2020.pdf",
+            "02_Military_Documents/dow-uap-d6-mission-report-arabian-gulf-2020 (1).pdf",
+            "02_Military_Documents/dow-uap-d7-mission-report-arabian-gulf-2020 (1).pdf"
+          ]
+        },
+        {
+          "episodeId": "EP-002-04",
+          "title": "Persian Gulf Region (August 2020)",
+          "type": "mission_report",
+          "location": "Persian Gulf",
+          "date": "2020-08",
+          "files": [
+            "02_Military_Documents/dow-uap-d60-mission-report-persian-gulf-august-2020.pdf",
+            "02_Military_Documents/dow-uap-d60-mission-report-persian-gulf-august-2020 (1).pdf",
+            "02_Military_Documents/dow-uap-d61-mission-report-persian-gulf-august-2020.pdf",
+            "02_Military_Documents/dow-uap-d61-mission-report-persian-gulf-august-2020 (1).pdf"
+          ]
+        },
+        {
+          "episodeId": "EP-002-05",
+          "title": "Strait of Hormuz Incidents (Sept-Oct 2020)",
+          "type": "mission_report",
+          "location": "Strait of Hormuz",
+          "dateRange": "2020-09 to 2020-10",
+          "files": [
+            "02_Military_Documents/dow-uap-d62-mission-report-strait-of-hormuz-september-2020.pdf",
+            "02_Military_Documents/dow-uap-d62-mission-report-strait-of-hormuz-september-2020 (1).pdf",
+            "02_Military_Documents/dow-uap-d63-mission-report-strait-of-hormuz-october-2020.pdf",
+            "02_Military_Documents/dow-uap-d63-mission-report-strait-of-hormuz-october-2020 (1).pdf"
+          ]
+        },
+        {
+          "episodeId": "EP-002-06",
+          "title": "Iran Border Incident (November 2020)",
+          "type": "mission_report",
+          "location": "Iran",
+          "date": "2020-11",
+          "files": [
+            "02_Military_Documents/dow-uap-d64-mission-report-iran-november-2020.pdf",
+            "02_Military_Documents/dow-uap-d64-mission-report-iran-november-2020 (1).pdf"
+          ]
+        },
+        {
+          "episodeId": "EP-002-07",
+          "title": "Mediterranean Operations",
+          "type": "mission_report",
+          "location": "Mediterranean Sea",
+          "files": [
+            "02_Military_Documents/dow-uap-d54-mission-report-mediterranean-sea-na.pdf",
+            "02_Military_Documents/dow-uap-d74-mission-report-syrte-november.pdf"
+          ]
+        },
+        {
+          "episodeId": "EP-002-08",
+          "title": "Gulf of Aden Incidents",
+          "type": "mission_report",
+          "location": "Gulf of Aden",
+          "files": [
+            "02_Military_Documents/dow-uap-d57-mission-report-gulf-of-aden-september-2020.pdf",
+            "02_Military_Documents/dow-uap-d57-mission-report-gulf-of-aden-september-2020 (1).pdf",
+            "02_Military_Documents/dow-uap-d75-mission-report-gulf-of-aden.pdf"
+          ]
+        },
+        {
+          "episodeId": "EP-002-09",
+          "title": "Range Fouler Incidents",
+          "type": "special_incident",
+          "description": "Unexplained interference with military operations",
+          "files": [
+            "02_Military_Documents/dow-uap-d56-range-fouler-debrief-arabian-sea-august-2020.pdf",
+            "02_Military_Documents/dow-uap-d58-range-fouler-debrief-na-october-2020.pdf",
+            "02_Military_Documents/dow-uap-d58-range-fouler-debrief-na-october-2020 (1).pdf"
+          ]
+        },
+        {
+          "episodeId": "EP-002-10",
+          "title": "Recent Communications (2023-2025)",
+          "type": "email_correspondence",
+          "description": "Official correspondence regarding ongoing UAP observations",
+          "files": [
+            "02_Military_Documents/dow-uap-d50-email-correspondence-indopacom-april-2025.pdf",
+            "02_Military_Documents/dow-uap-d51-email-correspondence-pacific-time-zone-march-2023.pdf",
+            "02_Military_Documents/dow-uap-d52-email-correspondance-na-august-2024.pdf"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "CASE-003",
+      "title": "Cold War Era Diplomatic Cables",
+      "type": "historical_cables",
+      "description": "Declassified State Department cables regarding UAP incidents during Cold War",
+      "yearRange": "1985-1994",
+      "locations": ["Papua New Guinea", "Kazakhstan"],
+      "agency": "State Department",
+      "episodes": [
+        {
+          "episodeId": "EP-003-01",
+          "title": "Papua New Guinea Incident (January 1985)",
+          "type": "diplomatic_cable",
+          "location": "Papua New Guinea",
+          "date": "1985-01",
+          "files": [
+            "02_Military_Documents/dos-uap-d1-cable-1-papua-new-guinea-january-1985.pdf",
+            "02_Military_Documents/dos-uap-d1-cable-1-papua-new-guinea-january-1985 (1).pdf"
+          ]
+        },
+        {
+          "episodeId": "EP-003-02",
+          "title": "Kazakhstan Incident (January 1994)",
+          "type": "diplomatic_cable",
+          "location": "Kazakhstan",
+          "date": "1994-01",
+          "description": "Post-Soviet era incident near Kazakhstan",
+          "files": [
+            "02_Military_Documents/dos-uap-d2-cable-2-kazakhstan-january-1994.pdf",
+            "02_Military_Documents/dos-uap-d2-cable-2-kazakhstan-january-1994 (1).pdf"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "CASE-004",
+      "title": "NASA Apollo & Skylab Missions",
+      "type": "space_program",
+      "description": "UAP observations and anomalies documented during Apollo and Skylab space missions",
+      "yearRange": "1969-1973",
+      "agency": "NASA",
+      "missionTypes": ["Apollo 11", "Apollo 12", "Apollo 17", "Skylab"],
+      "episodes": [
+        {
+          "episodeId": "EP-004-01",
+          "title": "Apollo 11/12 Technical Debriefing",
+          "type": "crew_debriefing",
+          "missions": ["Apollo 11", "Apollo 12"],
+          "date": "1969",
+          "files": ["03_NASA_Documents/nasa-uap-d1-apollo-11-12-technical-crew-debriefing-1969.pdf"]
+        },
+        {
+          "episodeId": "EP-004-02",
+          "title": "Apollo 12 Technical Debriefing",
+          "type": "crew_debriefing",
+          "mission": "Apollo 12",
+          "date": "1969",
+          "files": ["03_NASA_Documents/nasa-uap-d2-apollo-12-technical-crew-debriefing-1969.pdf"]
+        },
+        {
+          "episodeId": "EP-004-03",
+          "title": "Apollo Mission Debriefings",
+          "type": "crew_debriefing",
+          "files": [
+            "03_NASA_Documents/nasa-uap-d4-apollo-technical-crew-debriefing.pdf",
+            "03_NASA_Documents/nasa-uap-d5-apollo-technical-crew-debriefing.pdf"
+          ]
+        },
+        {
+          "episodeId": "EP-004-04",
+          "title": "Skylab Program Documentation",
+          "type": "crew_debriefing",
+          "date": "1973",
+          "files": [
+            "03_NASA_Documents/nasa-uap-d6-skylab-technical-crew-debriefing-1973.pdf",
+            "03_NASA_Documents/nasa-uap-d7-skylab-technical-crew-debriefing-1973.pdf"
+          ]
+        },
+        {
+          "episodeId": "EP-004-05",
+          "title": "Apollo 12 Video Evidence (1969)",
+          "type": "mission_footage",
+          "mission": "Apollo 12",
+          "date": "1969",
+          "description": "Original video footage from Apollo 12 mission with anomalies",
+          "files": [
+            "03_NASA_Documents/nasa-uap-vm1-apollo-12-1969.jpg",
+            "03_NASA_Documents/nasa-uap-vm1-apollo-12-1969 (1).jpg",
+            "03_NASA_Documents/nasa-uap-vm2-apollo-12-1969.jpg",
+            "03_NASA_Documents/nasa-uap-vm2-apollo-12-1969 (1).jpg"
+          ]
+        },
+        {
+          "episodeId": "EP-004-06",
+          "title": "Apollo 17 Lunar Anomalies (1972)",
+          "type": "mission_footage",
+          "mission": "Apollo 17",
+          "date": "1972",
+          "description": "Archival imagery showing anomalous lights above lunar terrain",
+          "files": [
+            "03_NASA_Documents/nasa-uap-vm3-apollo-12-1969.jpg",
+            "03_NASA_Documents/nasa-uap-vm3-apollo-12-1969 (1).jpg",
+            "03_NASA_Documents/nasa-uap-vm4-apollo-12-1969.jpg",
+            "03_NASA_Documents/nasa-uap-vm4-apollo-12-1969 (1).jpg",
+            "03_NASA_Documents/nasa-uap-vm5-apollo-12-1969.jpg",
+            "03_NASA_Documents/nasa-uap-vm5-apollo-12-1969 (1).jpg",
+            "03_NASA_Documents/nasa-uap-vm6-apollo-17-1972.jpg",
+            "03_NASA_Documents/nasa-uap-vm6-apollo-17-1972 (1).jpg"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "CASE-005",
+      "title": "Western United States Field Investigation",
+      "type": "field_investigation",
+      "description": "FBI investigative photographs and detailed analysis of Western US UAP incidents",
+      "yearRange": "2025-2026",
+      "location": "Western United States",
+      "agency": "FBI",
+      "subIncidents": 24,
+      "episodes": [
+        {
+          "episodeId": "EP-005-01",
+          "title": "Photographic Evidence Series (December 2025)",
+          "type": "field_photographs",
+          "date": "2025-12",
+          "description": "Infrared and thermal imaging of unidentified objects",
+          "files": [
+            "04_Field_Images/fbi-photo-a1.png",
+            "04_Field_Images/fbi-photo-a1 (1).png",
+            "04_Field_Images/fbi-photo-a2.png",
+            "04_Field_Images/fbi-photo-a2 (1).png",
+            "04_Field_Images/fbi-photo-a3.png",
+            "04_Field_Images/fbi-photo-a3 (1).png",
+            "04_Field_Images/fbi-photo-a4.png",
+            "04_Field_Images/fbi-photo-a4 (1).png",
+            "04_Field_Images/fbi-photo-a5.png",
+            "04_Field_Images/fbi-photo-a5 (1).png",
+            "04_Field_Images/fbi-photo-a6.png",
+            "04_Field_Images/fbi-photo-a6 (1).png",
+            "04_Field_Images/fbi-photo-a7.png",
+            "04_Field_Images/fbi-photo-a7 (1).png",
+            "04_Field_Images/fbi-photo-a8.png",
+            "04_Field_Images/fbi-photo-a8 (1).png"
+          ]
+        },
+        {
+          "episodeId": "EP-005-02",
+          "title": "Photographic Analysis Reports (24 Incidents)",
+          "type": "analysis_report",
+          "description": "Detailed analysis of 24 separate photographic incidents",
+          "files": [
+            "04_Field_Images/fbi-photo-b1.pdf",
+            "04_Field_Images/fbi-photo-b1 (1).pdf",
+            "04_Field_Images/fbi-photo-b2.pdf",
+            "04_Field_Images/fbi-photo-b2 (1).pdf",
+            "04_Field_Images/fbi-photo-b3.pdf",
+            "04_Field_Images/fbi-photo-b3 (1).pdf",
+            "04_Field_Images/fbi-photo-b4.pdf",
+            "04_Field_Images/fbi-photo-b4 (1).pdf",
+            "04_Field_Images/fbi-photo-b5.pdf",
+            "04_Field_Images/fbi-photo-b5 (1).pdf",
+            "04_Field_Images/fbi-photo-b6.pdf",
+            "04_Field_Images/fbi-photo-b6 (1).pdf",
+            "04_Field_Images/fbi-photo-b7.pdf",
+            "04_Field_Images/fbi-photo-b7 (1).pdf",
+            "04_Field_Images/fbi-photo-b8.pdf",
+            "04_Field_Images/fbi-photo-b8 (1).pdf",
+            "04_Field_Images/fbi-photo-b9.pdf",
+            "04_Field_Images/fbi-photo-b9 (1).pdf",
+            "04_Field_Images/fbi-photo-b10.pdf",
+            "04_Field_Images/fbi-photo-b10 (1).pdf",
+            "04_Field_Images/fbi-photo-b11.pdf",
+            "04_Field_Images/fbi-photo-b11 (1).pdf",
+            "04_Field_Images/fbi-photo-b12.pdf",
+            "04_Field_Images/fbi-photo-b12 (1).pdf",
+            "04_Field_Images/fbi-photo-b13.pdf",
+            "04_Field_Images/fbi-photo-b13 (1).pdf",
+            "04_Field_Images/fbi-photo-b14.pdf",
+            "04_Field_Images/fbi-photo-b14 (1).pdf",
+            "04_Field_Images/fbi-photo-b15.pdf",
+            "04_Field_Images/fbi-photo-b15 (1).pdf",
+            "04_Field_Images/fbi-photo-b16.pdf",
+            "04_Field_Images/fbi-photo-b16 (1).pdf",
+            "04_Field_Images/fbi-photo-b17.pdf",
+            "04_Field_Images/fbi-photo-b17 (1).pdf",
+            "04_Field_Images/fbi-photo-b18.pdf",
+            "04_Field_Images/fbi-photo-b18 (1).pdf",
+            "04_Field_Images/fbi-photo-b19.pdf",
+            "04_Field_Images/fbi-photo-b19 (1).pdf",
+            "04_Field_Images/fbi-photo-b20.pdf",
+            "04_Field_Images/fbi-photo-b20 (1).pdf",
+            "04_Field_Images/fbi-photo-b21.pdf",
+            "04_Field_Images/fbi-photo-b21 (1).pdf",
+            "04_Field_Images/fbi-photo-b22.pdf",
+            "04_Field_Images/fbi-photo-b22 (1).pdf",
+            "04_Field_Images/fbi-photo-b23.pdf",
+            "04_Field_Images/fbi-photo-b23 (1).pdf",
+            "04_Field_Images/fbi-photo-b24.pdf",
+            "04_Field_Images/fbi-photo-b24 (1).pdf"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "CASE-006",
+      "title": "Witness Statements & Serial Documentation",
+      "type": "testimony",
+      "description": "Declassified witness statements and serial documentation (redacted)",
+      "yearRange": "2025-2026",
+      "agency": "DOW/FBI",
+      "episodes": [
+        {
+          "episodeId": "EP-006-01",
+          "title": "Serial #3 Documentation",
+          "type": "official_record",
+          "status": "redacted",
+          "files": [
+            "05_User_Statements/serial-3_redacted.pdf",
+            "05_User_Statements/serial-3_redacted (1).pdf"
+          ]
+        },
+        {
+          "episodeId": "EP-006-02",
+          "title": "Serial #4 Documentation",
+          "type": "official_record",
+          "status": "redacted",
+          "files": [
+            "05_User_Statements/serial-4-redacted_redacted.pdf",
+            "05_User_Statements/serial-4-redacted_redacted (1).pdf"
+          ]
+        },
+        {
+          "episodeId": "EP-006-03",
+          "title": "Serial #5 Documentation",
+          "type": "official_record",
+          "status": "redacted",
+          "files": [
+            "05_User_Statements/serial 5 redacted_redacted.pdf",
+            "05_User_Statements/serial 5 redacted_redacted (1).pdf"
+          ]
+        },
+        {
+          "episodeId": "EP-006-04",
+          "title": "Eyewitness Statement",
+          "type": "witness_testimony",
+          "status": "redacted",
+          "description": "Personal account from witness(es)",
+          "files": [
+            "05_User_Statements/usper-statement-redacted.pdf",
+            "05_User_Statements/usper-statement-redacted (1).pdf"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "CASE-007",
+      "title": "Western US Regional Event Summary",
+      "type": "presentation",
+      "description": "Compiled presentation slides summarizing major UAP events in Western United States",
+      "date": "2026-05-08",
+      "location": "Western United States",
+      "agency": "DOW",
+      "episodes": [
+        {
+          "episodeId": "EP-007-01",
+          "title": "Event Slides & Summary Presentation",
+          "type": "presentation_slides",
+          "date": "2026-05-08",
+          "files": [
+            "06_Event_Slides/western_us_event_slides_5.08.2026.pdf",
+            "06_Event_Slides/western_us_event_slides_5.08.2026 (1).pdf"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "CASE-008",
+      "title": "DOD Video Evidence Archive",
+      "type": "video_evidence",
+      "description": "Department of Defense video documentation of UAP incidents and military operations",
+      "yearRange": "Multiple",
+      "totalVideos": 28,
+      "episodes": [
+        {
+          "episodeId": "EP-008-01",
+          "title": "DOD UAP Video Evidence Collection",
+          "type": "video_archive",
+          "description": "28 videos of military UAP sightings and operational incidents",
+          "files": [
+            "07_Videos/DOD_111688723.mp4",
+            "07_Videos/DOD_111688762.mp4",
+            "07_Videos/DOD_111688775.mp4",
+            "07_Videos/DOD_111688809.mp4",
+            "07_Videos/DOD_111688816.mp4",
+            "07_Videos/DOD_111688825.mp4",
+            "07_Videos/DOD_111688954.mp4",
+            "07_Videos/DOD_111688964.mp4",
+            "07_Videos/DOD_111688970.mp4",
+            "07_Videos/DOD_111688997.mp4",
+            "07_Videos/DOD_111689005.mp4",
+            "07_Videos/DOD_111689011.mp4",
+            "07_Videos/DOD_111689022-1920x1080-9000k.mp4",
+            "07_Videos/DOD_111689030.mp4",
+            "07_Videos/DOD_111689044.mp4",
+            "07_Videos/DOD_111689051.mp4",
+            "07_Videos/DOD_111689057.mp4",
+            "07_Videos/DOD_111689082.mp4",
+            "07_Videos/DOD_111689083.mp4",
+            "07_Videos/DOD_111689090.mp4",
+            "07_Videos/DOD_111689115.mp4",
+            "07_Videos/DOD_111689123.mp4",
+            "07_Videos/DOD_111689133.mp4",
+            "07_Videos/DOD_111689142.mp4",
+            "07_Videos/DOD_111689167.mp4",
+            "07_Videos/DOD_111689168.mp4",
+            "07_Videos/DOD_111689232.mp4",
+            "07_Videos/DOD_111689759.mp4"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "CASE-009",
+      "title": "Summary & Overview",
+      "type": "compiled_index",
+      "description": "Comprehensive index of all PURSUE Release 01 materials",
+      "date": "2026-05-09",
+      "files": [
+        "INDEX.md",
+        "CASE_DATABASE.json"
+      ]
+    }
+  ],
+  "webAppStructure": {
+    "primaryView": "EpisodeViewer",
+    "secondaryView": "CaseTable",
+    "tertiaryView": "Timeline",
+    "features": [
+      "case_browsing",
+      "episode_navigation",
+      "document_linking",
+      "timeline_view",
+      "geographic_mapping",
+      "source_attribution",
+      "related_incidents_linking"
+    ]
+  }
+}
