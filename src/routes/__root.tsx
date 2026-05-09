@@ -8,13 +8,9 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import { RadioProvider } from "@/components/UapRadio";
+import { defaultDescription, defaultTitle, seoHead } from "@/lib/seo";
 
 import appCss from "../styles.css?url";
-
-const siteTitle = "The UAP Gazette - Declassified Files, PURSUE Release 01";
-const siteDescription =
-  "An old-newspaper archive of the Department of War's first major UAP disclosure: 9 cases, 23 incidents, 197 files.";
-const socialImage = "/og-image.png";
 
 function NotFoundComponent() {
   return (
@@ -78,27 +74,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: siteTitle },
-      { name: "description", content: siteDescription },
-      { name: "author", content: "The UAP Archive" },
-      { property: "og:site_name", content: "The UAP Archive" },
-      { property: "og:title", content: siteTitle },
-      { property: "og:description", content: siteDescription },
-      { property: "og:type", content: "website" },
-      { property: "og:image", content: socialImage },
-      { property: "og:image:width", content: "512" },
-      { property: "og:image:height", content: "512" },
-      { property: "og:image:alt", content: "The UAP Archive insignia" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:title", content: siteTitle },
-      { name: "twitter:description", content: siteDescription },
-      { name: "twitter:image", content: socialImage },
+      { name: "theme-color", content: "#16130f" },
+      ...seoHead({ title: defaultTitle, description: defaultDescription }).meta,
     ],
     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "icon", href: "/favicon.png", type: "image/png" },
       { rel: "shortcut icon", href: "/favicon.ico" },
       { rel: "apple-touch-icon", href: "/apple-touch-icon.png", sizes: "180x180" },
+      { rel: "manifest", href: "/site.webmanifest" },
+      { rel: "sitemap", type: "application/xml", href: "/sitemap.xml" },
+      { rel: "alternate", type: "text/plain", href: "/llms.txt", title: "LLMs index" },
+      ...seoHead().links,
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
