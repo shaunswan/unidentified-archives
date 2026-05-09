@@ -27,11 +27,10 @@ function Index() {
             alt="A glowing unidentified object in a dark night sky"
             width={1920}
             height={1088}
-            className="h-full w-full object-cover opacity-70"
+            className="h-full w-full object-cover opacity-90"
           />
           <div className="vignette absolute inset-0" />
-          <div className="scanlines absolute inset-0 opacity-50" />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/30 to-background" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/30 to-background" />
         </div>
 
         <div className="relative mx-auto max-w-7xl px-6 pt-24 pb-32 sm:pt-32 sm:pb-44">
