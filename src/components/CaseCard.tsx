@@ -24,41 +24,40 @@ export function CaseCard({ c, index }: { c: Case; index: number }) {
     <Link
       to="/cases/$caseId"
       params={{ caseId: c.caseId }}
-      className="group relative flex flex-col overflow-hidden rounded-sm border border-border bg-card transition-all hover:border-primary/60 hover:shadow-[0_0_30px_-12px_var(--color-primary)]"
+      className="group relative flex flex-col overflow-hidden border border-foreground/70 bg-card p-5 transition-all hover:bg-secondary"
     >
-      <div className="absolute right-3 top-3 z-10 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-        EP. {String(index + 1).padStart(2, "0")}
+      {/* Top dateline */}
+      <div className="flex items-center justify-between border-b border-foreground/40 pb-2 font-mono text-[10px] uppercase tracking-widest">
+        <span>No. {String(index + 1).padStart(2, "0")}</span>
+        <span>{c.agency ?? "—"}</span>
       </div>
 
-      <div className="relative aspect-[16/9] overflow-hidden bg-secondary">
-        <div
-          className="absolute inset-0 scanlines opacity-60 transition-opacity group-hover:opacity-100"
-          style={{
-            backgroundImage:
-              "radial-gradient(ellipse at 70% 40%, oklch(0.78 0.16 62 / 0.25), transparent 60%), linear-gradient(180deg, oklch(0.18 0.02 60), oklch(0.1 0.01 60))",
-          }}
-        />
-        <div className="vignette absolute inset-0" />
-        <div className="absolute bottom-3 left-3 font-mono text-[10px] uppercase tracking-widest text-primary">
-          {typeLabel[c.type] ?? c.type}
-        </div>
-        <div className="absolute right-3 bottom-3 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-          {c.agency ?? "—"}
-        </div>
+      {/* Kicker */}
+      <div className="mt-3 text-center font-mono text-[10px] uppercase tracking-[0.25em]">
+        {typeLabel[c.type] ?? c.type}
       </div>
 
-      <div className="flex flex-1 flex-col gap-3 p-5">
-        <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
-          {period}{c.location ? ` · ${c.location}` : ""}
-        </div>
-        <h3 className="font-display text-2xl leading-tight text-foreground transition-colors group-hover:text-primary">
-          {c.title}
-        </h3>
-        <p className="line-clamp-2 text-sm text-muted-foreground">{c.description}</p>
-        <div className="mt-auto flex items-center justify-between border-t border-border/60 pt-3 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-          <span>{epCount} episodes</span>
-          <span>{fileCount} files</span>
-        </div>
+      {/* Headline */}
+      <h3 className="mt-2 text-center font-serif text-2xl font-black leading-tight">
+        {c.title}
+      </h3>
+
+      {/* Byline */}
+      <div className="mt-2 text-center font-serif text-xs italic">
+        {period}{c.location ? ` · ${c.location}` : ""}
+      </div>
+
+      <div className="my-3 border-t border-dashed border-foreground/40" />
+
+      {/* Lede */}
+      <p className="font-serif text-sm leading-relaxed text-foreground/85 text-justify line-clamp-4">
+        {c.description}
+      </p>
+
+      <div className="mt-auto flex items-center justify-between border-t border-foreground/40 pt-3 font-mono text-[10px] uppercase tracking-widest">
+        <span>{epCount} episodes</span>
+        <span className="italic font-serif normal-case tracking-normal">cont'd inside →</span>
+        <span>{fileCount} files</span>
       </div>
     </Link>
   );
