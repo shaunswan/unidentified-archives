@@ -8,7 +8,7 @@ export const Route = createFileRoute("/cases/$caseId")({
   loader: ({ params }) => {
     const c = getCase(params.caseId);
     if (!c) throw notFound();
-    return { c };
+    return { c: c! };
   },
   head: ({ loaderData }) => ({
     meta: [
