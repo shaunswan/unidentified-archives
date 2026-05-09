@@ -52,3 +52,8 @@ tmp_pdf_previews/
 *.njsproj
 *.sln
 *.sw?
+.vercel
+.env*.local
+
+# Cursor worktrees
+.claude/worktrees/

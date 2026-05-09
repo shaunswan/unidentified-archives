@@ -3,6 +3,7 @@ import "./lib/error-capture";
 import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import archiveData from "./data/cases.json";
+import radioManifest from "./data/radio-tracks.json";
 import { consumeLastCapturedError } from "./lib/error-capture";
 import { renderErrorPage } from "./lib/error-page";
 
@@ -10,10 +11,66 @@ type ServerEntry = {
   fetch: (request: Request, env: unknown, ctx: unknown) => Promise<Response> | Response;
 };
 
+type R2ObjectBody = {
+  body: ReadableStream | null;
+  httpEtag?: string;
+  size?: number;
+  httpMetadata?: { contentType?: string };
+};
+
+type R2ListResult = {
+  objects: Array<{ key: string; size: number }>;
+  truncated?: boolean;
+  cursor?: string;
+};
+
+type R2Bucket = {
+  get(key: string): Promise<R2ObjectBody | null>;
+  list(options?: { prefix?: string; cursor?: string; limit?: number }): Promise<R2ListResult>;
+};
+
+type WorkerEnv = {
+  REPOSITORY?: R2Bucket;
+  R2_PUBLIC_BASE_URL?: string;
+} | null | undefined;
+
 let serverEntryPromise: Promise<ServerEntry> | undefined;
 const repositoryRoot = path.resolve(process.cwd(), "repository");
 const radioRoot = path.resolve(repositoryRoot, "09_UAP_Radio");
 const staticRoutes = ["/", "/search", "/timeline", "/map", "/about"];
+
+function getR2Bucket(env: WorkerEnv): R2Bucket | null {
+  const bucket = env?.REPOSITORY;
+  if (bucket && typeof bucket === "object" && typeof bucket.get === "function") {
+    return bucket;
+  }
+  return null;
+}
+
+function getPublicR2BaseUrl(env: WorkerEnv): string | null {
+  const candidates = [env?.R2_PUBLIC_BASE_URL, getProcessEnv("R2_PUBLIC_BASE_URL")];
+  for (const value of candidates) {
+    if (typeof value === "string" && value.trim()) {
+      return value.trim().replace(/\/$/, "");
+    }
+  }
+  return null;
+}
+
+function getProcessEnv(key: string): string | undefined {
+  if (typeof process === "undefined" || !process.env) return undefined;
+  return process.env[key];
+}
+
+function encodeR2PathForUrl(relativePath: string): string {
+  return relativePath
+    .replace(/\\/g, "/")
+    .split("/")
+    .filter(Boolean)
+    .map((segment) => encodeURIComponent(segment))
+    .join("/");
+}
+
 const releaseDate = (archiveData as ArchiveData).metadata.created;
 
 type ArchiveEpisode = {
@@ -77,32 +134,65 @@ function contentTypeFor(filePath: string): string {
   }
 }
 
-async function maybeServeRadioPlaylist(request: Request): Promise<Response | null> {
+type RadioTrack = { name: string; path: string; href: string };
+
+function trackForRadioKey(key: string): RadioTrack {
+  const filename = key.split("/").pop() ?? key;
+  return {
+    name: path.basename(filename, ".mp3").replace(/[_-]+/g, " "),
+    path: key,
+    href: `/repository/${encodeR2PathForUrl(key)}`,
+  };
+}
+
+function manifestRadioTracks(): RadioTrack[] {
+  const tracks = (radioManifest as { tracks?: Array<{ path: string }> }).tracks ?? [];
+  return tracks
+    .filter((track) => typeof track.path === "string" && track.path.toLowerCase().endsWith(".mp3"))
+    .map((track) => trackForRadioKey(track.path))
+    .sort((a, b) => a.name.localeCompare(b.name));
+}
+
+async function maybeServeRadioPlaylist(
+  request: Request,
+  env: WorkerEnv,
+): Promise<Response | null> {
   const url = new URL(request.url);
   if (url.pathname !== "/api/radio") return null;
 
   try {
-    const entries = await readdir(radioRoot, { withFileTypes: true });
-    const tracks = entries
-      .filter((entry) => entry.isFile() && path.extname(entry.name).toLowerCase() === ".mp3")
-      .map((entry) => {
-        const relativePath = `09_UAP_Radio/${entry.name}`;
-        const encodedPath = relativePath
-          .split("/")
-          .map((segment) => encodeURIComponent(segment))
-          .join("/");
+    const bucket = getR2Bucket(env);
+    if (bucket) {
+      const tracks: RadioTrack[] = [];
+      let cursor: string | undefined;
+      do {
+        const result = await bucket.list({ prefix: "09_UAP_Radio/", cursor });
+        for (const obj of result.objects) {
+          if (!obj.key.toLowerCase().endsWith(".mp3")) continue;
+          tracks.push(trackForRadioKey(obj.key));
+        }
+        cursor = result.truncated ? result.cursor : undefined;
+      } while (cursor);
+      tracks.sort((a, b) => a.name.localeCompare(b.name));
+      return Response.json({ tracks });
+    }
 
-        return {
-          name: path.basename(entry.name, ".mp3").replace(/[_-]+/g, " "),
-          path: relativePath,
-          href: `/repository/${encodedPath}`,
-        };
-      })
-      .sort((a, b) => a.name.localeCompare(b.name));
+    if (getPublicR2BaseUrl(env)) {
+      return Response.json({ tracks: manifestRadioTracks() });
+    }
 
-    return Response.json({ tracks });
+    try {
+      const entries = await readdir(radioRoot, { withFileTypes: true });
+      const tracks = entries
+        .filter((entry) => entry.isFile() && path.extname(entry.name).toLowerCase() === ".mp3")
+        .map((entry) => trackForRadioKey(`09_UAP_Radio/${entry.name}`))
+        .sort((a, b) => a.name.localeCompare(b.name));
+      return Response.json({ tracks });
+    } catch {
+      return Response.json({ tracks: manifestRadioTracks() });
+    }
   } catch {
-    return Response.json({ tracks: [] });
+    return Response.json({ tracks: manifestRadioTracks() });
   }
 }
 
@@ -114,7 +204,7 @@ function securityHeaders(): Record<string, string> {
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com data:",
       "img-src 'self' data: blob: https:",
-      "media-src 'self' blob:",
+      "media-src 'self' blob: https:",
       "connect-src 'self' https:",
       "frame-ancestors 'none'",
       "base-uri 'self'",
@@ -277,7 +367,10 @@ function maybeServeMachineIndex(request: Request): Response | null {
   return null;
 }
 
-async function maybeServeRepositoryAsset(request: Request): Promise<Response | null> {
+async function maybeServeRepositoryAsset(
+  request: Request,
+  env: WorkerEnv,
+): Promise<Response | null> {
   const url = new URL(request.url);
   if (!url.pathname.startsWith("/repository/")) return null;
 
@@ -287,6 +380,27 @@ async function maybeServeRepositoryAsset(request: Request): Promise<Response | n
 
   if (relativeToRoot.startsWith("..") || path.isAbsolute(relativeToRoot)) {
     return new Response("Not found", { status: 404 });
+  }
+
+  const r2Key = relativePath.replace(/\\/g, "/");
+
+  const bucket = getR2Bucket(env);
+  if (bucket) {
+    const obj = await bucket.get(r2Key);
+    if (!obj || !obj.body) return new Response("Not found", { status: 404 });
+    const headers = new Headers({
+      "content-type": obj.httpMetadata?.contentType ?? contentTypeFor(r2Key),
+      "cache-control": "public, max-age=300",
+      "content-disposition": `inline; filename="${path.basename(r2Key)}"`,
+    });
+    if (obj.httpEtag) headers.set("etag", obj.httpEtag);
+    if (typeof obj.size === "number") headers.set("content-length", String(obj.size));
+    return new Response(obj.body, { status: 200, headers });
+  }
+
+  const publicBaseUrl = getPublicR2BaseUrl(env);
+  if (publicBaseUrl) {
+    return Response.redirect(`${publicBaseUrl}/${encodeR2PathForUrl(r2Key)}`, 307);
   }
 
   try {
@@ -354,14 +468,15 @@ async function normalizeCatastrophicSsrResponse(response: Response): Promise<Res
 
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
+    const workerEnv = env as WorkerEnv;
     try {
       const machineIndexResponse = maybeServeMachineIndex(request);
       if (machineIndexResponse) return withSecurityHeaders(machineIndexResponse);
 
-      const radioResponse = await maybeServeRadioPlaylist(request);
+      const radioResponse = await maybeServeRadioPlaylist(request, workerEnv);
       if (radioResponse) return withSecurityHeaders(radioResponse);
 
-      const assetResponse = await maybeServeRepositoryAsset(request);
+      const assetResponse = await maybeServeRepositoryAsset(request, workerEnv);
       if (assetResponse) return withSecurityHeaders(assetResponse);
 
       const handler = await getServerEntry();
