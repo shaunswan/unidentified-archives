@@ -137,6 +137,61 @@ function contentTypeFor(filePath: string): string {
   }
 }
 
+/**
+ * On Vercel we only have the public R2 URL (no binding). Redirecting PDFs with 307
+ * breaks embedded viewers (`<object>` / `<iframe>`): Chrome's PDF UI and Range
+ * requests commonly fail cross-origin after redirect. Proxy the bytes through this
+ * origin so the embed stays same-origin. Videos/images keep using 307.
+ */
+async function proxyRepositoryPdfFromPublicR2(
+  request: Request,
+  publicBaseUrl: string,
+  r2Key: string,
+): Promise<Response> {
+  if (request.method !== "GET" && request.method !== "HEAD") {
+    return new Response("Method Not Allowed", { status: 405 });
+  }
+  const target = `${publicBaseUrl}/${encodeR2PathForUrl(r2Key)}`;
+  const method = request.method === "HEAD" ? "HEAD" : "GET";
+  const init: RequestInit = { method };
+  if (method === "GET") {
+    const range = request.headers.get("range");
+    if (range) init.headers = { Range: range };
+  }
+
+  const upstream = await fetch(target, init);
+
+  if (upstream.status === 404) return new Response("Not found", { status: 404 });
+  if (!upstream.ok && upstream.status !== 206 && upstream.status !== 304) {
+    return new Response("Bad gateway", { status: 502 });
+  }
+
+  const out = new Headers();
+  for (const name of [
+    "content-type",
+    "content-length",
+    "content-range",
+    "accept-ranges",
+    "etag",
+    "last-modified",
+    "cache-control",
+    "content-disposition",
+  ]) {
+    const v = upstream.headers.get(name);
+    if (v) out.set(name, v);
+  }
+  if (!out.has("content-type")) out.set("content-type", contentTypeFor(r2Key));
+  if (!out.has("cache-control")) out.set("cache-control", "public, max-age=300");
+  if (!out.has("content-disposition")) {
+    out.set("content-disposition", `inline; filename="${path.basename(r2Key)}"`);
+  }
+
+  if (method === "HEAD") {
+    return new Response(null, { status: upstream.status, headers: out });
+  }
+  return new Response(upstream.body, { status: upstream.status, headers: out });
+}
+
 type RadioTrack = { name: string; path: string; href: string };
 
 function trackForRadioKey(key: string): RadioTrack {
@@ -401,6 +456,9 @@ async function maybeServeRepositoryAsset(
 
   const publicBaseUrl = getPublicR2BaseUrl(env);
   if (publicBaseUrl) {
+    if (r2Key.toLowerCase().endsWith(".pdf")) {
+      return proxyRepositoryPdfFromPublicR2(request, publicBaseUrl, r2Key);
+    }
     return Response.redirect(`${publicBaseUrl}/${encodeR2PathForUrl(r2Key)}`, 307);
   }
 
