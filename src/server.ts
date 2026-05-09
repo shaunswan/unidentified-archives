@@ -291,6 +291,26 @@ function withSecurityHeaders(response: Response): Response {
   });
 }
 
+/** Binary streams served at /repository/* must not use X-Frame-Options or page CSP — those break `<object>` / `<iframe>` PDF and video embeds in the app. */
+function withRepositoryAssetHeaders(response: Response): Response {
+  const headers = new Headers(response.headers);
+  const minimal: Record<string, string> = {
+    "referrer-policy": "strict-origin-when-cross-origin",
+    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+    "x-content-type-options": "nosniff",
+    "x-permitted-cross-domain-policies": "none",
+  };
+  for (const [key, value] of Object.entries(minimal)) {
+    if (!headers.has(key)) headers.set(key, value);
+  }
+
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  });
+}
+
 function xmlEscape(value: string): string {
   return value
     .replace(/&/g, "&amp;")
@@ -536,7 +556,7 @@ export default {
       if (radioResponse) return withSecurityHeaders(radioResponse);
 
       const assetResponse = await maybeServeRepositoryAsset(request, workerEnv);
-      if (assetResponse) return withSecurityHeaders(assetResponse);
+      if (assetResponse) return withRepositoryAssetHeaders(assetResponse);
 
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
