@@ -2,99 +2,189 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { CaseCard } from "@/components/CaseCard";
 import { cases, metadata, totalEpisodes, totalFiles } from "@/lib/cases";
-import heroImg from "@/assets/hero-uap.jpg";
 
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "The UAP Archive — Declassified Files, PURSUE Release 01" },
-      { name: "description", content: "Browse 9 cases and 23+ incidents from the Department of War's first major UAP disclosure release." },
+      { title: "The UAP Gazette — Declassified Files, PURSUE Release 01" },
+      { name: "description", content: "An old-newspaper archive of the Department of War's first major UAP disclosure: 9 cases, 23 incidents, 197 files." },
     ],
   }),
 });
 
 function Index() {
+  const today = new Date().toLocaleDateString("en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen newsprint text-foreground">
       <SiteHeader />
 
-      {/* HERO */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0">
-          <img
-            src={heroImg}
-            alt="A glowing unidentified object in a dark night sky"
-            width={1920}
-            height={1088}
-            className="h-full w-full object-cover"
-          />
-          {/* Dark wash so light hero text stays legible end-to-end */}
-          <div className="absolute inset-0 bg-[oklch(0.13_0.012_60_/_0.55)]" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[oklch(0.13_0.012_60_/_0.2)] via-[oklch(0.13_0.012_60_/_0.55)] to-[oklch(0.13_0.012_60)]" />
-          <div className="vignette absolute inset-0" />
-        </div>
-
-        <div className="relative mx-auto max-w-7xl px-6 pt-24 pb-32 text-[oklch(0.97_0.012_85)] sm:pt-32 sm:pb-44">
-          <div className="font-mono text-[10px] uppercase tracking-[0.4em] text-[oklch(0.78_0.16_55)]">
-            ◈ Declassified · {metadata.created}
+      {/* MASTHEAD */}
+      <section className="relative">
+        <div className="mx-auto max-w-7xl px-6 pt-10">
+          {/* Top dateline strip */}
+          <div className="flex flex-wrap items-end justify-between gap-2 border-b border-foreground/70 pb-2 font-serif text-[11px] italic">
+            <span>Vol. I &middot; No. 01</span>
+            <span className="uppercase tracking-widest not-italic">Declassified Edition</span>
+            <span>Price: One Dime</span>
           </div>
-          <h1 className="mt-6 max-w-4xl font-display text-5xl leading-[1.05] sm:text-7xl md:text-8xl">
-            Declassified — <em className="not-italic text-[oklch(0.78_0.16_55)]">Are we alone?</em>
+
+          {/* Masthead title */}
+          <h1 className="mt-4 text-center font-blackletter text-7xl leading-none sm:text-8xl md:text-[9rem]">
+            The UAP Gazette
           </h1>
-          <p className="mt-8 max-w-2xl text-lg leading-relaxed text-[oklch(0.85_0.012_85)]">
-            An interactive archive of the Department of War's first major UAP
-            disclosure: nine cases, twenty-three incidents, and one hundred
-            and ninety-seven files spanning six decades — from Apollo to
-            the Strait of Hormuz.
-          </p>
 
-          <div className="mt-12 flex flex-wrap gap-4">
-            <a
-              href="#cases"
-              className="rounded-sm bg-[oklch(0.97_0.012_85)] px-6 py-3 font-mono text-xs uppercase tracking-widest text-[oklch(0.18_0.012_60)] transition-all hover:bg-accent hover:text-accent-foreground"
-            >
-              ▶ Begin browsing
-            </a>
-            <Link
-              to="/about"
-              className="rounded-sm border border-[oklch(0.97_0.012_85_/_0.4)] px-6 py-3 font-mono text-xs uppercase tracking-widest text-[oklch(0.97_0.012_85)] transition-all hover:border-[oklch(0.97_0.012_85)]"
-            >
-              About this release
-            </Link>
+          {/* Sub dateline */}
+          <div className="mt-3 flex flex-wrap items-center justify-between gap-2 rule-double py-2 font-serif text-xs">
+            <span className="uppercase tracking-widest">{today}</span>
+            <span className="italic">"All The Truth That's Fit To Disclose"</span>
+            <span className="uppercase tracking-widest">PURSUE / Release {metadata.created}</span>
           </div>
 
-          {/* Stats strip */}
-          <dl className="mt-20 grid max-w-3xl grid-cols-2 gap-x-6 gap-y-8 border-t border-[oklch(0.97_0.012_85_/_0.25)] pt-8 sm:grid-cols-4">
-            {[
-              ["09", "Cases"],
-              [String(metadata.totalIncidents), "Incidents"],
-              [String(totalEpisodes), "Episodes"],
-              [String(totalFiles), "Files"],
-            ].map(([n, l]) => (
-              <div key={l}>
-                <div className="font-display text-4xl text-[oklch(0.78_0.16_55)] sm:text-5xl">{n}</div>
-                <div className="mt-1 font-mono text-[10px] uppercase tracking-widest text-[oklch(0.75_0.012_85)]">
-                  {l}
+          {/* HERO HEADLINE — newspaper style */}
+          <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-12">
+            {/* Left column: lead story */}
+            <article className="md:col-span-8 md:border-r md:border-foreground/40 md:pr-8">
+              <div className="text-center">
+                <div className="font-mono text-[11px] uppercase tracking-[0.3em]">
+                  ★ Extra ★ Extra ★
+                </div>
+                <h2 className="mt-3 font-serif text-5xl font-black leading-[0.95] sm:text-6xl md:text-7xl">
+                  ARE WE ALONE?
+                </h2>
+                <div className="mt-3 font-serif text-2xl italic">
+                  Department of War Releases First Tranche of UAP Files
+                </div>
+                <div className="mt-2 font-mono text-[10px] uppercase tracking-widest">
+                  By Staff Correspondents &middot; Filed from Washington
                 </div>
               </div>
-            ))}
-          </dl>
+
+              <div className="mt-8 columns-1 gap-8 sm:columns-2 [&>p]:mb-4 [&>p]:font-serif [&>p]:text-[15px] [&>p]:leading-relaxed [&>p]:text-justify">
+                <p className="dropcap">
+                  In an extraordinary disclosure, the Department of War has
+                  posted the first tranche of materials it calls PURSUE
+                  Release {metadata.created} — a sweeping collection of
+                  mission reports, diplomatic cables, NASA crew debriefings,
+                  field photographs, witness statements and motion-picture
+                  evidence concerning Unidentified Anomalous Phenomena.
+                </p>
+                <p>
+                  The archive, presented herein, reorganizes some
+                  {" "}{totalFiles} files into {cases.length} cases and
+                  {" "}{totalEpisodes} narrative episodes — that the curious
+                  reader may pursue the matter not as a flat directory but
+                  as a documentary serial: by mission, by location, by year.
+                </p>
+                <p>
+                  Geographies span the Apollo program of the late 'sixties,
+                  Cold War cables from Papua New Guinea and Kazakhstan,
+                  decades of CENTCOM operations across the Persian Gulf and
+                  Mediterranean, and recent Bureau field investigations
+                  across the Western United States.
+                </p>
+                <p>
+                  Readers are invited to begin with the Catalog below, or to
+                  consult the Timeline for a chronological accounting of
+                  events. The originals remain hosted by the source.
+                </p>
+              </div>
+
+              <div className="mt-6 flex flex-wrap items-center gap-3 border-t border-foreground/40 pt-4">
+                <a
+                  href="#cases"
+                  className="border-2 border-foreground bg-foreground px-5 py-2 font-mono text-[11px] uppercase tracking-widest text-background transition hover:bg-background hover:text-foreground"
+                >
+                  Read the catalog →
+                </a>
+                <Link
+                  to="/timeline"
+                  className="border-2 border-foreground px-5 py-2 font-mono text-[11px] uppercase tracking-widest transition hover:bg-foreground hover:text-background"
+                >
+                  Open timeline
+                </Link>
+                <Link
+                  to="/about"
+                  className="font-serif text-sm italic underline underline-offset-4"
+                >
+                  About this edition
+                </Link>
+              </div>
+            </article>
+
+            {/* Right column: sidebar stories */}
+            <aside className="md:col-span-4">
+              <div className="border-y-4 border-double border-foreground py-3 text-center">
+                <div className="font-mono text-[10px] uppercase tracking-[0.3em]">By the Numbers</div>
+                <dl className="mt-3 grid grid-cols-2 gap-3">
+                  {[
+                    ["09", "Cases"],
+                    [String(metadata.totalIncidents), "Incidents"],
+                    [String(totalEpisodes), "Episodes"],
+                    [String(totalFiles), "Files"],
+                  ].map(([n, l]) => (
+                    <div key={l} className="border border-foreground/30 px-2 py-3">
+                      <div className="font-serif text-4xl font-black leading-none">{n}</div>
+                      <div className="mt-1 font-mono text-[9px] uppercase tracking-widest">{l}</div>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+
+              <div className="mt-6 border-t border-foreground/40 pt-4">
+                <div className="font-mono text-[10px] uppercase tracking-[0.3em]">Inside this edition</div>
+                <ul className="mt-3 space-y-3 font-serif text-sm">
+                  <li className="border-b border-dashed border-foreground/40 pb-2">
+                    <span className="font-black">Apollo Crew Debriefs</span> — astronauts on
+                    sightings beyond the cradle of Earth.
+                  </li>
+                  <li className="border-b border-dashed border-foreground/40 pb-2">
+                    <span className="font-black">Strait of Hormuz</span> — CENTCOM logs an
+                    unidentified contact at altitude.
+                  </li>
+                  <li className="border-b border-dashed border-foreground/40 pb-2">
+                    <span className="font-black">Papua, '74</span> — diplomatic cables from
+                    a missionary's village.
+                  </li>
+                  <li>
+                    <span className="font-black">Western U.S. Files</span> — Bureau field
+                    photography across four states.
+                  </li>
+                </ul>
+              </div>
+
+              <div className="mt-6 border-2 border-foreground p-4 text-center">
+                <div className="font-blackletter text-2xl">Notice</div>
+                <p className="mt-2 font-serif text-sm italic">
+                  This edition is compiled from public records released by the
+                  Department of War. Files remain hosted by the source.
+                </p>
+                <a
+                  href="https://www.war.gov/ufo"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 inline-block font-mono text-[10px] uppercase tracking-widest underline underline-offset-4"
+                >
+                  www.war.gov/ufo ↗
+                </a>
+              </div>
+            </aside>
+          </div>
         </div>
       </section>
 
       {/* CASES GRID */}
-      <section id="cases" className="relative mx-auto max-w-7xl px-6 py-20">
-        <div className="mb-10 flex items-end justify-between border-b border-border/60 pb-6">
-          <div>
-            <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-              Catalog · 9 cases
-            </div>
-            <h2 className="mt-3 font-display text-4xl">The Files</h2>
-          </div>
-          <div className="hidden font-mono text-xs uppercase tracking-widest text-muted-foreground sm:block">
-            Source: war.gov/ufo
-          </div>
+      <section id="cases" className="relative mx-auto max-w-7xl px-6 py-16">
+        <div className="mb-8 rule-double py-3 text-center">
+          <div className="font-mono text-[10px] uppercase tracking-[0.3em]">Section B &middot; The Catalog</div>
+          <h2 className="mt-2 font-serif text-4xl font-black">Nine Cases of Note</h2>
+          <div className="mt-1 font-serif text-sm italic">— arranged for the discerning reader —</div>
         </div>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -104,10 +194,10 @@ function Index() {
         </div>
       </section>
 
-      <footer className="border-t border-border/60 py-10">
-        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-4 px-6 font-mono text-xs uppercase tracking-widest text-muted-foreground sm:flex-row sm:items-center">
-          <span>The UAP Archive · PURSUE Release 01</span>
-          <span>Compiled {metadata.created} · Source www.war.gov/ufo</span>
+      <footer className="border-t-4 border-double border-foreground py-8">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-6 text-center font-serif text-xs italic sm:flex-row">
+          <span>The UAP Gazette &middot; PURSUE Release 01</span>
+          <span>Compiled {metadata.created} &middot; Source: www.war.gov/ufo</span>
         </div>
       </footer>
     </div>
