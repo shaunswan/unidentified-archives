@@ -27,10 +27,12 @@ function Index() {
             alt="A glowing unidentified object in a dark night sky"
             width={1920}
             height={1088}
-            className="h-full w-full object-cover opacity-90"
+            className="h-full w-full object-cover"
           />
+          {/* Dark wash so light hero text stays legible end-to-end */}
+          <div className="absolute inset-0 bg-[oklch(0.13_0.012_60_/_0.55)]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[oklch(0.13_0.012_60_/_0.2)] via-[oklch(0.13_0.012_60_/_0.55)] to-[oklch(0.13_0.012_60)]" />
           <div className="vignette absolute inset-0" />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/30 to-background" />
         </div>
 
         <div className="relative mx-auto max-w-7xl px-6 pt-24 pb-32 text-[oklch(0.97_0.012_85)] sm:pt-32 sm:pb-44">
