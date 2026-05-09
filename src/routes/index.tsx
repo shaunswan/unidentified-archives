@@ -33,14 +33,14 @@ function Index() {
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/30 to-background" />
         </div>
 
-        <div className="relative mx-auto max-w-7xl px-6 pt-24 pb-32 sm:pt-32 sm:pb-44">
-          <div className="font-mono text-[10px] uppercase tracking-[0.4em] text-accent">
+        <div className="relative mx-auto max-w-7xl px-6 pt-24 pb-32 text-[oklch(0.97_0.012_85)] sm:pt-32 sm:pb-44">
+          <div className="font-mono text-[10px] uppercase tracking-[0.4em] text-[oklch(0.78_0.16_55)]">
             ◈ Declassified · {metadata.created}
           </div>
           <h1 className="mt-6 max-w-4xl font-display text-5xl leading-[1.05] sm:text-7xl md:text-8xl">
-            Declassified — <em className="not-italic text-accent">Are we alone?</em>
+            Declassified — <em className="not-italic text-[oklch(0.78_0.16_55)]">Are we alone?</em>
           </h1>
-          <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+          <p className="mt-8 max-w-2xl text-lg leading-relaxed text-[oklch(0.85_0.012_85)]">
             An interactive archive of the Department of War's first major UAP
             disclosure: nine cases, twenty-three incidents, and one hundred
             and ninety-seven files spanning six decades — from Apollo to
@@ -50,20 +50,20 @@ function Index() {
           <div className="mt-12 flex flex-wrap gap-4">
             <a
               href="#cases"
-              className="rounded-sm border border-primary bg-primary px-6 py-3 font-mono text-xs uppercase tracking-widest text-primary-foreground transition-all hover:bg-transparent hover:text-primary"
+              className="rounded-sm bg-[oklch(0.97_0.012_85)] px-6 py-3 font-mono text-xs uppercase tracking-widest text-[oklch(0.18_0.012_60)] transition-all hover:bg-accent hover:text-accent-foreground"
             >
               ▶ Begin browsing
             </a>
             <Link
               to="/about"
-              className="rounded-sm border border-border px-6 py-3 font-mono text-xs uppercase tracking-widest text-foreground transition-all hover:border-primary hover:text-primary"
+              className="rounded-sm border border-[oklch(0.97_0.012_85_/_0.4)] px-6 py-3 font-mono text-xs uppercase tracking-widest text-[oklch(0.97_0.012_85)] transition-all hover:border-[oklch(0.97_0.012_85)]"
             >
               About this release
             </Link>
           </div>
 
           {/* Stats strip */}
-          <dl className="mt-20 grid max-w-3xl grid-cols-2 gap-x-6 gap-y-8 border-t border-border/60 pt-8 sm:grid-cols-4">
+          <dl className="mt-20 grid max-w-3xl grid-cols-2 gap-x-6 gap-y-8 border-t border-[oklch(0.97_0.012_85_/_0.25)] pt-8 sm:grid-cols-4">
             {[
               ["09", "Cases"],
               [String(metadata.totalIncidents), "Incidents"],
@@ -71,8 +71,8 @@ function Index() {
               [String(totalFiles), "Files"],
             ].map(([n, l]) => (
               <div key={l}>
-                <div className="font-display text-4xl text-primary sm:text-5xl">{n}</div>
-                <div className="mt-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                <div className="font-display text-4xl text-[oklch(0.78_0.16_55)] sm:text-5xl">{n}</div>
+                <div className="mt-1 font-mono text-[10px] uppercase tracking-widest text-[oklch(0.75_0.012_85)]">
                   {l}
                 </div>
               </div>
