@@ -2,19 +2,13 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { CaseCard } from "@/components/CaseCard";
 import { cases, metadata, totalEpisodes, totalFiles } from "@/lib/cases";
+import { defaultDescription, defaultTitle, seoHead } from "@/lib/seo";
 import { Map, Search } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
-    meta: [
-      { title: "The UAP Gazette — Declassified Files, PURSUE Release 01" },
-      {
-        name: "description",
-        content:
-          "An old-newspaper archive of the Department of War's first major UAP disclosure: 9 cases, 23 incidents, 197 files.",
-      },
-    ],
+    ...seoHead({ title: defaultTitle, description: defaultDescription, path: "/" }),
   }),
 });
 

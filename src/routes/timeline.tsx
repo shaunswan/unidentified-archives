@@ -1,15 +1,18 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { cases, type Case, type Episode } from "@/lib/cases";
+import { seoHead } from "@/lib/seo";
 import { useMemo, useState } from "react";
 
 export const Route = createFileRoute("/timeline")({
   component: TimelinePage,
   head: () => ({
-    meta: [
-      { title: "Timeline — The UAP Archive" },
-      { name: "description", content: "A chronological timeline of UAP incidents from 1969 to 2026, drawn from PURSUE Release 01." },
-    ],
+    ...seoHead({
+      title: "UAP Incident Timeline - 1969 to 2026",
+      description:
+        "A chronological timeline of dated UAP incidents from Apollo-era reports through Western U.S. field investigations, drawn from PURSUE Release 01.",
+      path: "/timeline",
+    }),
   }),
 });
 
@@ -49,7 +52,8 @@ function buildEntries(): TimelineEntry[] {
   for (const c of cases) {
     if (!c.episodes) continue;
     for (const ep of c.episodes) {
-      const raw = ep.date ?? ep.dateRange?.split(" ")[0] ?? c.date ?? (c.year ? String(c.year) : undefined);
+      const raw =
+        ep.date ?? ep.dateRange?.split(" ")[0] ?? c.date ?? (c.year ? String(c.year) : undefined);
       const parsed = parseDate(raw);
       if (!parsed) continue;
       out.push({
@@ -119,9 +123,9 @@ function TimelinePage() {
             {minYear} → {maxYear}
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-            Every dated incident in the archive, plotted in sequence.
-            Move from Apollo's lunar anomalies to last year's Western US
-            field investigations along a single thread of declassified time.
+            Every dated incident in the archive, plotted in sequence. Move from Apollo's lunar
+            anomalies to last year's Western US field investigations along a single thread of
+            declassified time.
           </p>
 
           {/* Era axis */}
@@ -172,10 +176,7 @@ function TimelinePage() {
                 <li key={e.caseId + e.episodeId + i} className="relative">
                   {showYear && (
                     <div className="sticky top-[64px] z-10 -mx-2 mb-4 mt-10 flex items-baseline gap-4 bg-background/85 px-2 py-2 backdrop-blur first:mt-0">
-                      <span
-                        className="font-display text-5xl"
-                        style={{ color: tint }}
-                      >
+                      <span className="font-display text-5xl" style={{ color: tint }}>
                         {e.year}
                       </span>
                       <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
@@ -206,8 +207,18 @@ function TimelinePage() {
                     <div className="rounded-sm border border-border bg-card p-5 transition-all group-hover:border-primary/60 group-hover:shadow-[0_0_24px_-12px_var(--color-primary)] sm:ml-4">
                       <div className="flex flex-wrap items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
                         <span style={{ color: tint }}>{e.type.replace(/_/g, " ")}</span>
-                        {e.location && <><span>·</span><span>{e.location}</span></>}
-                        {e.agency && <><span>·</span><span>{e.agency}</span></>}
+                        {e.location && (
+                          <>
+                            <span>·</span>
+                            <span>{e.location}</span>
+                          </>
+                        )}
+                        {e.agency && (
+                          <>
+                            <span>·</span>
+                            <span>{e.agency}</span>
+                          </>
+                        )}
                       </div>
                       <h3 className="mt-2 font-display text-2xl leading-snug transition-colors group-hover:text-primary">
                         {e.title}

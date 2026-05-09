@@ -1,0 +1,24 @@
+{
+  "name": "The UAP Gazette",
+  "short_name": "UAP Gazette",
+  "description": "A searchable public archive of PURSUE Release 01 UAP cases, episodes, maps, timelines, and source files.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#16130f",
+  "theme_color": "#16130f",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

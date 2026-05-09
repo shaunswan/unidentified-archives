@@ -4,18 +4,17 @@ import { useEffect, useMemo, useState } from "react";
 import { ExternalLink, Globe2, MapPin } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { buildEvidenceMapPoints, type EvidenceMapPoint } from "@/lib/archive-index";
+import { seoHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/map")({
   component: EvidenceMapPage,
   head: () => ({
-    meta: [
-      { title: "Evidence Map - The UAP Archive" },
-      {
-        name: "description",
-        content:
-          "An interactive map of approximate archive regions and non-geographic space program evidence in PURSUE Release 01.",
-      },
-    ],
+    ...seoHead({
+      title: "UAP Evidence Map - PURSUE Release 01 Regions",
+      description:
+        "An interactive map of approximate UAP archive regions, linked cases, episodes, agencies, files, and non-geographic space program evidence.",
+      path: "/map",
+    }),
   }),
 });
 

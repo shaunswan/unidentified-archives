@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { FilePreview } from "@/components/FilePreview";
 import { getCase, getEpisode } from "@/lib/cases";
+import { episodeDescription, seoHead } from "@/lib/seo";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 export const Route = createFileRoute("/cases/$caseId/episodes/$episodeId")({
@@ -16,10 +17,14 @@ export const Route = createFileRoute("/cases/$caseId/episodes/$episodeId")({
     return { c, ep, idx, prev, next };
   },
   head: ({ loaderData }) => ({
-    meta: [
-      { title: loaderData ? `${loaderData.ep.title} - UAP Archive` : "Episode" },
-      { name: "description", content: loaderData?.ep.description ?? loaderData?.ep.title ?? "" },
-    ],
+    ...seoHead({
+      title: loaderData ? `${loaderData.ep.title} - ${loaderData.c.caseId}` : "Episode",
+      description: loaderData ? episodeDescription(loaderData.c, loaderData.ep) : undefined,
+      path: loaderData
+        ? `/cases/${loaderData.c.caseId}/episodes/${loaderData.ep.episodeId}`
+        : undefined,
+      type: "article",
+    }),
   }),
 });
 

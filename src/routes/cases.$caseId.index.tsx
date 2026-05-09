@@ -1,6 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { getCase, type Episode } from "@/lib/cases";
+import { caseDescription, seoHead } from "@/lib/seo";
 import { ArrowLeft, ChevronRight } from "lucide-react";
 
 export const Route = createFileRoute("/cases/$caseId/")({
@@ -11,10 +12,12 @@ export const Route = createFileRoute("/cases/$caseId/")({
     return { c };
   },
   head: ({ loaderData }) => ({
-    meta: [
-      { title: loaderData ? `${loaderData.c.title} â€” UAP Archive` : "Case â€” UAP Archive" },
-      { name: "description", content: loaderData?.c.description ?? "" },
-    ],
+    ...seoHead({
+      title: loaderData ? `${loaderData.c.title} - The UAP Gazette` : "Case - The UAP Gazette",
+      description: loaderData ? caseDescription(loaderData.c) : undefined,
+      path: loaderData ? `/cases/${loaderData.c.caseId}` : undefined,
+      type: "article",
+    }),
   }),
 });
 
@@ -40,7 +43,10 @@ function CasePage() {
         <div className="scanlines absolute inset-0 opacity-40" />
 
         <div className="relative mx-auto max-w-7xl px-6 py-16">
-          <Link to="/" className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-muted-foreground transition-colors hover:text-primary">
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-muted-foreground transition-colors hover:text-primary"
+          >
             <ArrowLeft className="h-3 w-3" /> All cases
           </Link>
 
@@ -76,7 +82,10 @@ function CasePage() {
           {c.locations && (
             <div className="mt-6 flex flex-wrap gap-2">
               {c.locations.map((l: string) => (
-                <span key={l} className="rounded-sm border border-border bg-card px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                <span
+                  key={l}
+                  className="rounded-sm border border-border bg-card px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground"
+                >
                   {l}
                 </span>
               ))}
@@ -111,9 +120,7 @@ function CasePage() {
                       {e.date && <span>Â· {e.date}</span>}
                       {e.dateRange && <span>Â· {e.dateRange}</span>}
                       {e.location && <span>Â· {e.location}</span>}
-                      {e.status === "redacted" && (
-                        <span className="text-accent">Â· REDACTED</span>
-                      )}
+                      {e.status === "redacted" && <span className="text-accent">Â· REDACTED</span>}
                     </div>
                     <h3 className="mt-2 font-display text-2xl leading-snug transition-colors group-hover:text-primary">
                       {e.title}

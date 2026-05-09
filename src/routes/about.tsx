@@ -1,14 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { metadata, totalEpisodes, totalFiles, cases } from "@/lib/cases";
+import { archiveSummary, seoHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/about")({
   component: About,
   head: () => ({
-    meta: [
-      { title: "About — The UAP Archive" },
-      { name: "description", content: "About the PURSUE Release 01 archive: methodology, sources, and how to navigate the cases." },
-    ],
+    ...seoHead({
+      title: "About The UAP Gazette - Archive Methodology",
+      description: archiveSummary(),
+      path: "/about",
+    }),
   }),
 });
 
@@ -28,31 +30,27 @@ function About() {
 
         <div className="prose-invert mt-10 space-y-6 text-lg leading-relaxed text-muted-foreground">
           <p>
-            On {metadata.created}, the Department of War posted the first
-            tranche of materials it calls <em className="text-foreground">PURSUE Release 01</em> —
-            a collection of mission reports, diplomatic cables, NASA crew
-            debriefings, FBI field photography, witness statements and
-            video evidence relating to Unidentified Anomalous Phenomena.
+            On {metadata.created}, the Department of War posted the first tranche of materials it
+            calls <em className="text-foreground">PURSUE Release 01</em> — a collection of mission
+            reports, diplomatic cables, NASA crew debriefings, FBI field photography, witness
+            statements and video evidence relating to Unidentified Anomalous Phenomena.
           </p>
           <p>
-            This archive reorganizes those <span className="text-foreground">{totalFiles} files</span>
-            {" "}into <span className="text-foreground">{cases.length} cases</span> and
-            {" "}<span className="text-foreground">{totalEpisodes} narrative episodes</span> so that
-            you can move through the material the way you would a
-            documentary series — by location, by mission, by year — instead
-            of as a flat directory.
+            This archive reorganizes those{" "}
+            <span className="text-foreground">{totalFiles} files</span> into{" "}
+            <span className="text-foreground">{cases.length} cases</span> and{" "}
+            <span className="text-foreground">{totalEpisodes} narrative episodes</span> so that you
+            can move through the material the way you would a documentary series — by location, by
+            mission, by year — instead of as a flat directory.
           </p>
           <p>
-            Originating agencies in this release include
-            {" "}{agencies.join(", ")}. The geography spans the Apollo
-            program of the late 1960s, Cold War cables from Papua New
-            Guinea and Kazakhstan, decades of CENTCOM operations across the
-            Persian Gulf and Mediterranean, and recent FBI field
-            investigations across the Western United States.
+            Originating agencies in this release include {agencies.join(", ")}. The geography spans
+            the Apollo program of the late 1960s, Cold War cables from Papua New Guinea and
+            Kazakhstan, decades of CENTCOM operations across the Persian Gulf and Mediterranean, and
+            recent FBI field investigations across the Western United States.
           </p>
           <p>
-            Original files are hosted by the source.
-            {" "}
+            Original files are hosted by the source.{" "}
             <a
               href="https://www.war.gov/ufo"
               target="_blank"

@@ -12,18 +12,17 @@ import {
   type ArchiveSearchResult,
 } from "@/lib/archive-index";
 import { fileHref } from "@/lib/cases";
+import { seoHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/search")({
   component: SearchPage,
   head: () => ({
-    meta: [
-      { title: "Search - The UAP Archive" },
-      {
-        name: "description",
-        content:
-          "Search cases, episodes, agencies, regions, dates, files, and evidence types in PURSUE Release 01.",
-      },
-    ],
+    ...seoHead({
+      title: "Search UAP Cases, Episodes, Files, Agencies, and Regions",
+      description:
+        "Search the PURSUE Release 01 archive by case, episode, agency, region, date, evidence type, source folder, PDF, image, video, and file name.",
+      path: "/search",
+    }),
   }),
 });
 
