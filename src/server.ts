@@ -6,6 +6,7 @@ import archiveData from "./data/cases.json";
 import radioManifest from "./data/radio-tracks.json";
 import { consumeLastCapturedError } from "./lib/error-capture";
 import { renderErrorPage } from "./lib/error-page";
+import { dedupedSourceFileCount } from "./lib/sourceFiles";
 
 type ServerEntry = {
   fetch: (request: Request, env: unknown, ctx: unknown) => Promise<Response> | Response;
@@ -50,8 +51,18 @@ function getR2Bucket(env: WorkerEnv): R2Bucket | null {
   return null;
 }
 
+// Public R2 base URL compiled in at build time when the env var is available.
+// Falls back to the hard-coded public bucket URL so Vercel (Nitro) deployments
+// serve repository assets even without a runtime env var.
+declare const __R2_PUBLIC_BASE_URL__: string | undefined;
+
 function getPublicR2BaseUrl(env: WorkerEnv): string | null {
-  const candidates = [env?.R2_PUBLIC_BASE_URL, getProcessEnv("R2_PUBLIC_BASE_URL")];
+  const candidates: (string | undefined)[] = [
+    env?.R2_PUBLIC_BASE_URL,
+    getProcessEnv("R2_PUBLIC_BASE_URL"),
+    // Compile-time constant injected by vite.config.ts (Vercel builds)
+    typeof __R2_PUBLIC_BASE_URL__ !== "undefined" ? __R2_PUBLIC_BASE_URL__ : undefined,
+  ];
   for (const value of candidates) {
     if (typeof value === "string" && value.trim()) {
       return value.trim().replace(/\/$/, "");
@@ -381,7 +392,7 @@ function llmsResponse(request: Request): Response {
       const episodes = (c.episodes ?? [])
         .map(
           (ep) =>
-            `  - [${ep.title}](${origin}/cases/${encodeURIComponent(c.caseId)}/episodes/${encodeURIComponent(ep.episodeId)}): ${ep.description ?? `${ep.files.length} source file(s)`}`,
+            `  - [${ep.title}](${origin}/cases/${encodeURIComponent(c.caseId)}/episodes/${encodeURIComponent(ep.episodeId)}): ${ep.description ?? `${dedupedSourceFileCount(ep.files)} source file(s)`}`,
         )
         .join("\n");
       return `- [${c.title}](${origin}/cases/${encodeURIComponent(c.caseId)}): ${c.description}${c.agency ? ` Agency: ${c.agency}.` : ""}\n${episodes}`;
