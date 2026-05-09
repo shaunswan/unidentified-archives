@@ -17,6 +17,9 @@ export function SiteHeader() {
           <Link to="/" activeOptions={{ exact: true }} className="text-muted-foreground transition-colors hover:text-foreground [&.active]:text-primary">
             Cases
           </Link>
+          <Link to="/timeline" className="text-muted-foreground transition-colors hover:text-foreground [&.active]:text-primary">
+            Timeline
+          </Link>
           <Link to="/about" className="text-muted-foreground transition-colors hover:text-foreground [&.active]:text-primary">
             About
           </Link>
