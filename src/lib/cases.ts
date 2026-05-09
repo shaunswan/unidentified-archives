@@ -1,5 +1,7 @@
 import data from "@/data/cases.json";
 
+declare const __REPOSITORY_ROOT__: string;
+
 export type Episode = {
   episodeId: string;
   title: string;
@@ -59,6 +61,12 @@ export const fileKind = (path: string): "pdf" | "video" | "image" | "data" => {
 };
 
 export const fileName = (path: string) => path.split("/").pop() ?? path;
+
+export const fileHref = (path: string) =>
+  `/repository/${path.split("/").map((segment) => encodeURIComponent(segment)).join("/")}`;
+
+export const localFileHref = (filePath: string) =>
+  `file:///${`${__REPOSITORY_ROOT__}/${filePath}`.replace(/\\/g, "/").replace(/ /g, "%20")}`;
 
 export const totalEpisodes = cases.reduce((n, c) => n + (c.episodes?.length ?? 0), 0);
 export const totalFiles = cases.reduce(

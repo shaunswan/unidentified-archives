@@ -1,0 +1,125 @@
+=== UAP DOCUMENT CASE ANALYSIS ===
+
+INITIAL REPORTS SERIES (059uap files):
+- 059uap00011.pdf
+- 059uap00012.pdf
+- 059uap00013.pdf
+- 2024-04-30-composite-sketch.pdf
+Files: 4 pairs (8 with duplicates)
+Type: Preliminary/Initial UAP documentation and visual composites
+Year: 2024
+Classification: Initial assessment documents
+
+MILITARY OPERATIONS SERIES (dow-uap-d):
+Military Mission Reports with Locations and Dates:
+
+D5: Arabian Gulf - 2020
+D6: Arabian Gulf - 2020
+D7: Arabian Gulf - 2020
+D49: Launch Summary - February 2000
+D50: Email Correspondence (INDOPACOM) - April 2025
+D51: Email Correspondence (Pacific) - March 2023
+D52: Email Correspondence (NA) - August 2024
+D54: Mediterranean Sea - unspecified date
+D55: Syria - November 2016
+D56: Arabian Sea - August 2020
+D57: Gulf of Aden - September 2020
+D58: NA (Range Fouler) - October 2020
+D60: Persian Gulf - August 2020
+D61: Persian Gulf - August 2020
+D62: Strait of Hormuz - September 2020
+D63: Strait of Hormuz - October 2020
+D64: Iran - November 2020
+D65: Persian Gulf - July 2020
+D74: Syrte (Mediterranean) - November [year]
+D75: Gulf of Aden - [date]
+PR20: Analysis report
+Total: 23 distinct reports + emails = ~36 files with duplicates
+
+STATE DEPARTMENT CABLES (dos-uap-d):
+D1: Papua New Guinea - January 1985
+D2: Kazakhstan - January 1994
+Total: 4 files (2 with duplicates)
+
+NASA DOCUMENTS (nasa-uap-d):
+D1: Apollo 11/12 technical crew debriefing
+D2: Apollo 12 technical crew debriefing
+D4: Apollo debriefing
+D5: Apollo debriefing
+D6: Skylab technical crew debriefing
+D7: Skylab technical crew debriefing (1973)
+Dates: 1969-1973 (Apollo/Skylab era)
+Plus Video Materials:
+vm1-vm6: Apollo 12 (1969) and Apollo 17 (1972) video footage
+Total: 24 files
+
+FIELD INVESTIGATION SERIES (fbi-photo):
+Photos: a1-a8 (PNG format) - 16 files
+Analysis: b1-b24 (PDF format) - 48 files
+Total: 64 files
+Content: Infrared/investigative imagery from Western US incidents
+
+USER STATEMENTS & SERIALS:
+Serial-3: Documentation (redacted)
+Serial-4: Documentation (redacted)
+Serial-5: Documentation (redacted)
+User-statement: Eyewitness testimony (redacted)
+Total: 8 files
+
+EVENT PRESENTATIONS:
+Western US Event Slides (5.08.2026) - Summary presentation
+Total: 2 files
+
+DOD VIDEO EVIDENCE:
+DOD_11*.mp4 - 28 video files
+ID Range: 1688723-1689759
+Content: Military UAP sightings, operational footage
+Total: 28 files
+
+=== INCIDENT CATEGORIES ===
+
+GEOGRAPHIC REGIONS:
+1. Middle East Operations:
+   - Arabian Gulf (D5, D6, D7, D60, D61, D65)
+   - Persian Gulf (D60, D61, D65)
+   - Strait of Hormuz (D62, D63)
+   - Mediterranean (D54, D74)
+   - Iran (D64)
+   - Syria (D55)
+   - Egypt/Syrte area (D74)
+
+2. Pacific/Indo-Pacific:
+   - Papua New Guinea (DOS-D1, 1985)
+   - Kazakhstan (DOS-D2, 1994)
+   - Pacific communications (D51)
+   - INDOPACOM report (D50, 2024/2025)
+
+3. Western United States:
+   - FBI Photos (fbi-photo series)
+   - Event Slides (western_us_event_slides)
+   - DOD videos
+
+4. Extraterrestrial/Historical:
+   - Apollo Missions (NASA-UAP-D1-D7, vm1-vm6)
+   - Skylab program
+
+TEMPORAL BREAKDOWN:
+1960s-1970s: Apollo/Skylab missions (NASA documents)
+1980s: Papua New Guinea cable (1985)
+1990s: Kazakhstan cable (1994)
+2000: Launch summary (D49, 2000)
+2013-2016: Syria (D55, 2016), Middle East operations (PR38, 2013)
+2019-2025: Recent operations and incidents
+2024-2026: Current investigations and email correspondence
+
+INCIDENT TYPES:
+1. Military Operations Reports: dow-uap-d series
+2. Historical Cables: dos-uap-d series
+3. NASA/Space Program: nasa-uap-d series
+4. Field Investigations: fbi-photo series
+5. Email Correspondence: D50, D51, D52
+6. Video Evidence: DOD videos
+7. Witness Statements: serial, user-statement
+8. Presentations: event slides
+9. Initial Reports: 059uap, composite-sketch
+

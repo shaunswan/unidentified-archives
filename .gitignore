@@ -20,6 +20,27 @@ dist-ssr
 .wrangler/
 .dev.vars
 
+# Local archive media transferred to the server manually
+repository/**/*.pdf
+repository/**/*.mp4
+repository/**/*.mp3
+repository/**/*.wav
+repository/**/*.m4a
+repository/**/*.jpg
+repository/**/*.jpeg
+repository/**/*.png
+repository/**/*.gif
+repository/**/*.webp
+repository/**/*.tif
+repository/**/*.tiff
+repository/**/*.mov
+repository/**/*.avi
+repository/**/*.mkv
+repository/**/*.webm
+
+# Generated document preview images
+tmp_pdf_previews/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

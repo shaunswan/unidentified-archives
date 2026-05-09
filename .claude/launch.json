@@ -1,0 +1,23 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "Vite Dev Server",
+      "runtimeExecutable": "vite",
+      "runtimeArgs": ["dev", "--port", "3000"],
+      "port": 3000
+    },
+    {
+      "name": "Vite Preview Server",
+      "runtimeExecutable": "vite",
+      "runtimeArgs": ["preview", "--port", "3001"],
+      "port": 3001
+    },
+    {
+      "name": "Build (Development Mode)",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "build:dev"],
+      "port": 5173
+    }
+  ]
+}

@@ -213,71 +213,77 @@
       "caseId": "CASE-004",
       "title": "NASA Apollo & Skylab Missions",
       "type": "space_program",
-      "description": "Primary-source NASA transcripts, crew debriefings, and annotated stills from Apollo and Skylab missions. The collection focuses on ambiguous lights, flashes, orbital objects, instrument anomalies, and crew observations recorded during Apollo 11, Apollo 12, Apollo 17, and Skylab flights between 1969 and 1973.",
+      "description": "UAP observations and anomalies documented during Apollo and Skylab space missions",
       "yearRange": "1969-1973",
       "agency": "NASA",
       "missionTypes": ["Apollo 11", "Apollo 12", "Apollo 17", "Skylab"],
       "episodes": [
         {
           "episodeId": "EP-004-01",
-          "title": "Apollo 12 Mission Transcript",
-          "type": "mission_transcript",
-          "mission": "Apollo 12",
+          "title": "Apollo 11/12 Technical Debriefing",
+          "type": "crew_debriefing",
+          "missions": ["Apollo 11", "Apollo 12"],
           "date": "1969",
-          "description": "Real-time Apollo 12 transcript excerpts covering reported lights and drifting particles in the dark quadrant, alongside an onboard display anomaly later discussed with mission control as a likely EMI-related event.",
-          "files": ["03_NASA_Documents/nasa-uap-d1-apollo-12-transcript-1969.pdf"]
+          "files": ["03_NASA_Documents/nasa-uap-d1-apollo-11-12-technical-crew-debriefing-1969.pdf"]
         },
         {
           "episodeId": "EP-004-02",
-          "title": "Apollo 17 Mission Transcript",
-          "type": "mission_transcript",
-          "mission": "Apollo 17",
-          "date": "1972",
-          "description": "Operational Apollo 17 communications discussing bright tumbling fragments after separation and a distant object that appeared to flash or rotate, preserving the observation in raw mission chatter rather than a later interpretive debrief.",
-          "files": ["03_NASA_Documents/nasa-uap-d2-apollo-17-transcript-1972.pdf"]
+          "title": "Apollo 12 Technical Debriefing",
+          "type": "crew_debriefing",
+          "mission": "Apollo 12",
+          "date": "1969",
+          "files": ["03_NASA_Documents/nasa-uap-d2-apollo-12-technical-crew-debriefing-1969.pdf"]
         },
         {
           "episodeId": "EP-004-03",
-          "title": "Apollo 11 and Apollo 17 Debriefings",
+          "title": "Apollo Mission Debriefings",
           "type": "crew_debriefing",
-          "description": "Combined Apollo debrief material documenting an ambiguous translunar object seen during Apollo 11 and repeated light-flash and measurement-anomaly discussions during Apollo 17. The records emphasize uncertainty, with crews and analysts weighing ordinary spacecraft debris, radiation effects, and observational limits alongside more unusual interpretations.",
           "files": [
-            "03_NASA_Documents/nasa-uap-d4-apollo-11-technical-crew-debriefing-1969.pdf",
-            "03_NASA_Documents/nasa-uap-d5-apollo-17-crew-debriefing-for-science-1973.pdf",
-            "03_NASA_Documents/nasa-uap-d6-apollo-17-technical-crew-debriefing-1973.pdf"
+            "03_NASA_Documents/nasa-uap-d4-apollo-technical-crew-debriefing.pdf",
+            "03_NASA_Documents/nasa-uap-d5-apollo-technical-crew-debriefing.pdf"
           ]
         },
         {
           "episodeId": "EP-004-04",
-          "title": "Skylab 1/2 and 1/3 Technical Crew Debriefings",
+          "title": "Skylab Program Documentation",
           "type": "crew_debriefing",
           "date": "1973",
-          "description": "Skylab debriefings recording recurring light flashes, streaks, and visual spots that crews compared against cosmic-particle effects and conditions such as the South Atlantic Anomaly. The same document also preserves a longer visual track of a bright reddish object in a similar orbit that was tentatively described as satellite-like but never fully explained in the debrief.",
-          "files": ["03_NASA_Documents/nasa-uap-d7-skylab-technical-crew-debriefing-1973.pdf"]
+          "files": [
+            "03_NASA_Documents/nasa-uap-d6-skylab-technical-crew-debriefing-1973.pdf",
+            "03_NASA_Documents/nasa-uap-d7-skylab-technical-crew-debriefing-1973.pdf"
+          ]
         },
         {
           "episodeId": "EP-004-05",
-          "title": "Apollo 12 Anomalous Light Stills (1969)",
-          "type": "mission_imagery",
+          "title": "Apollo 12 Video Evidence (1969)",
+          "type": "mission_footage",
           "mission": "Apollo 12",
           "date": "1969",
-          "description": "Annotated Apollo 12 still images highlighting bright points, streaks, and clustered lights against black sky and above the lunar horizon. The visuals align with transcript references to drifting particles, flashes, and other luminous objects seen during the mission.",
+          "description": "Original video footage from Apollo 12 mission with anomalies",
           "files": [
             "03_NASA_Documents/nasa-uap-vm1-apollo-12-1969.jpg",
+            "03_NASA_Documents/nasa-uap-vm1-apollo-12-1969 (1).jpg",
             "03_NASA_Documents/nasa-uap-vm2-apollo-12-1969.jpg",
-            "03_NASA_Documents/nasa-uap-vm3-apollo-12-1969.jpg",
-            "03_NASA_Documents/nasa-uap-vm4-apollo-12-1969.jpg",
-            "03_NASA_Documents/nasa-uap-vm5-apollo-12-1969.jpg"
+            "03_NASA_Documents/nasa-uap-vm2-apollo-12-1969 (1).jpg"
           ]
         },
         {
           "episodeId": "EP-004-06",
-          "title": "Apollo 17 Annotated Lunar-Sky Still (1972)",
-          "type": "mission_imagery",
+          "title": "Apollo 17 Lunar Anomalies (1972)",
+          "type": "mission_footage",
           "mission": "Apollo 17",
           "date": "1972",
-          "description": "Annotated Apollo 17 imagery focusing on a single bright object above the lunar horizon. Unlike the denser Apollo 12 image group, this still isolates one luminous target and pairs it with mission-transcript context about flashing or rotating objects observed during flight.",
-          "files": ["03_NASA_Documents/nasa-uap-vm6-apollo-17-1972.jpg"]
+          "description": "Archival imagery showing anomalous lights above lunar terrain",
+          "files": [
+            "03_NASA_Documents/nasa-uap-vm3-apollo-12-1969.jpg",
+            "03_NASA_Documents/nasa-uap-vm3-apollo-12-1969 (1).jpg",
+            "03_NASA_Documents/nasa-uap-vm4-apollo-12-1969.jpg",
+            "03_NASA_Documents/nasa-uap-vm4-apollo-12-1969 (1).jpg",
+            "03_NASA_Documents/nasa-uap-vm5-apollo-12-1969.jpg",
+            "03_NASA_Documents/nasa-uap-vm5-apollo-12-1969 (1).jpg",
+            "03_NASA_Documents/nasa-uap-vm6-apollo-17-1972.jpg",
+            "03_NASA_Documents/nasa-uap-vm6-apollo-17-1972 (1).jpg"
+          ]
         }
       ]
     },

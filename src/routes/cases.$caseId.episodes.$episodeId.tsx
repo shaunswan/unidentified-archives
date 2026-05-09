@@ -17,7 +17,7 @@ export const Route = createFileRoute("/cases/$caseId/episodes/$episodeId")({
   },
   head: ({ loaderData }) => ({
     meta: [
-      { title: loaderData ? `${loaderData.ep.title} — UAP Archive` : "Episode" },
+      { title: loaderData ? `${loaderData.ep.title} - UAP Archive` : "Episode" },
       { name: "description", content: loaderData?.ep.description ?? loaderData?.ep.title ?? "" },
     ],
   }),
@@ -31,9 +31,10 @@ function EpisodePage() {
       <SiteHeader />
 
       <article className="mx-auto max-w-5xl px-6 py-12">
-        {/* Breadcrumb */}
         <nav className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-          <Link to="/" className="hover:text-primary">Archive</Link>
+          <Link to="/" className="hover:text-primary">
+            Archive
+          </Link>
           <span>/</span>
           <Link to="/cases/$caseId" params={{ caseId: c.caseId }} className="hover:text-primary">
             {c.caseId}
@@ -42,7 +43,6 @@ function EpisodePage() {
           <span className="text-foreground">{ep.episodeId}</span>
         </nav>
 
-        {/* Episode header */}
         <header className="relative mt-8 overflow-hidden rounded-sm border border-border bg-card p-8 sm:p-12">
           <div
             className="absolute inset-0 opacity-50"
@@ -63,9 +63,7 @@ function EpisodePage() {
               {ep.status === "redacted" && <span className="stamp !text-[10px]">Redacted</span>}
             </div>
 
-            <h1 className="mt-6 font-display text-4xl leading-tight sm:text-5xl">
-              {ep.title}
-            </h1>
+            <h1 className="mt-6 font-display text-4xl leading-tight sm:text-5xl">{ep.title}</h1>
 
             {ep.description && (
               <p className="mt-5 max-w-3xl text-lg leading-relaxed text-muted-foreground">
@@ -82,7 +80,6 @@ function EpisodePage() {
           </div>
         </header>
 
-        {/* Synopsis (case context) */}
         <section className="mt-10">
           <div className="flex items-center gap-3">
             <div className="h-px flex-1 bg-border" />
@@ -92,14 +89,19 @@ function EpisodePage() {
             <div className="h-px flex-1 bg-border" />
           </div>
           <p className="mt-6 text-base leading-relaxed text-muted-foreground">
-            Part of <Link to="/cases/$caseId" params={{ caseId: c.caseId }} className="text-foreground underline-offset-4 hover:text-primary hover:underline">{c.title}</Link>
-            {c.agency ? ` — a ${c.agency} ` : " — a "}
-            collection covering {c.yearRange ?? c.year ?? "the disclosed period"}.
-            {" "}{c.description}
+            Part of{" "}
+            <Link
+              to="/cases/$caseId"
+              params={{ caseId: c.caseId }}
+              className="text-foreground underline-offset-4 hover:text-primary hover:underline"
+            >
+              {c.title}
+            </Link>
+            {c.agency ? ` - a ${c.agency} ` : " - a "}
+            collection covering {c.yearRange ?? c.year ?? "the disclosed period"}. {c.description}
           </p>
         </section>
 
-        {/* Files */}
         <section className="mt-12">
           <div className="mb-6 flex items-end justify-between border-b border-border/60 pb-3">
             <h2 className="font-display text-2xl">Source Material</h2>
@@ -112,12 +114,8 @@ function EpisodePage() {
               <FilePreview key={f + i} path={f} index={i} />
             ))}
           </div>
-          <p className="mt-4 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-            ⓘ Previews are placeholders — original files will be wired in once hosted.
-          </p>
         </section>
 
-        {/* Pager */}
         <nav className="mt-16 grid grid-cols-1 gap-4 border-t border-border/60 pt-8 sm:grid-cols-2">
           {prev ? (
             <Link
@@ -130,7 +128,9 @@ function EpisodePage() {
               </span>
               <span className="font-display text-lg group-hover:text-primary">{prev.title}</span>
             </Link>
-          ) : <div />}
+          ) : (
+            <div />
+          )}
           {next ? (
             <Link
               to="/cases/$caseId/episodes/$episodeId"
@@ -142,7 +142,9 @@ function EpisodePage() {
               </span>
               <span className="font-display text-lg group-hover:text-primary">{next.title}</span>
             </Link>
-          ) : <div />}
+          ) : (
+            <div />
+          )}
         </nav>
       </article>
     </div>

@@ -13,6 +13,7 @@ import { Route as TimelineRouteImport } from './routes/timeline'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CasesCaseIdRouteImport } from './routes/cases.$caseId'
+import { Route as CasesCaseIdIndexRouteImport } from './routes/cases.$caseId.index'
 import { Route as CasesCaseIdEpisodesEpisodeIdRouteImport } from './routes/cases.$caseId.episodes.$episodeId'
 
 const TimelineRoute = TimelineRouteImport.update({
@@ -35,6 +36,11 @@ const CasesCaseIdRoute = CasesCaseIdRouteImport.update({
   path: '/cases/$caseId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CasesCaseIdIndexRoute = CasesCaseIdIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => CasesCaseIdRoute,
+} as any)
 const CasesCaseIdEpisodesEpisodeIdRoute =
   CasesCaseIdEpisodesEpisodeIdRouteImport.update({
     id: '/episodes/$episodeId',
@@ -47,13 +53,14 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/timeline': typeof TimelineRoute
   '/cases/$caseId': typeof CasesCaseIdRouteWithChildren
+  '/cases/$caseId/': typeof CasesCaseIdIndexRoute
   '/cases/$caseId/episodes/$episodeId': typeof CasesCaseIdEpisodesEpisodeIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/timeline': typeof TimelineRoute
-  '/cases/$caseId': typeof CasesCaseIdRouteWithChildren
+  '/cases/$caseId': typeof CasesCaseIdIndexRoute
   '/cases/$caseId/episodes/$episodeId': typeof CasesCaseIdEpisodesEpisodeIdRoute
 }
 export interface FileRoutesById {
@@ -62,6 +69,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/timeline': typeof TimelineRoute
   '/cases/$caseId': typeof CasesCaseIdRouteWithChildren
+  '/cases/$caseId/': typeof CasesCaseIdIndexRoute
   '/cases/$caseId/episodes/$episodeId': typeof CasesCaseIdEpisodesEpisodeIdRoute
 }
 export interface FileRouteTypes {
@@ -71,6 +79,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/timeline'
     | '/cases/$caseId'
+    | '/cases/$caseId/'
     | '/cases/$caseId/episodes/$episodeId'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -85,6 +94,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/timeline'
     | '/cases/$caseId'
+    | '/cases/$caseId/'
     | '/cases/$caseId/episodes/$episodeId'
   fileRoutesById: FileRoutesById
 }
@@ -125,6 +135,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CasesCaseIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cases/$caseId/': {
+      id: '/cases/$caseId/'
+      path: '/'
+      fullPath: '/cases/$caseId/'
+      preLoaderRoute: typeof CasesCaseIdIndexRouteImport
+      parentRoute: typeof CasesCaseIdRoute
+    }
     '/cases/$caseId/episodes/$episodeId': {
       id: '/cases/$caseId/episodes/$episodeId'
       path: '/episodes/$episodeId'
@@ -136,10 +153,12 @@ declare module '@tanstack/react-router' {
 }
 
 interface CasesCaseIdRouteChildren {
+  CasesCaseIdIndexRoute: typeof CasesCaseIdIndexRoute
   CasesCaseIdEpisodesEpisodeIdRoute: typeof CasesCaseIdEpisodesEpisodeIdRoute
 }
 
 const CasesCaseIdRouteChildren: CasesCaseIdRouteChildren = {
+  CasesCaseIdIndexRoute: CasesCaseIdIndexRoute,
   CasesCaseIdEpisodesEpisodeIdRoute: CasesCaseIdEpisodesEpisodeIdRoute,
 }
 
@@ -156,3 +175,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
